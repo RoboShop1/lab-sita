@@ -33,6 +33,38 @@ case $1 in
         	terraform apply
         	rm -f .terraform/terraform.tfstate
     ;;
+  "dev-destroy")
+          	rm -rf *auto.tfvars credentials
+          	AWS_ROLE_ARN=$(cat .aws/accounts.json | jq -r ".prod.arn" )
+          	aws sts assume-role --role-arn $AWS_ROLE_ARN --role-session-name prod | tee credentials
+          	echo "Assumed role: $AWS_ROLE_ARN "
+          	export AWS_ACCESS_KEY_ID=$(jq -r '.Credentials.AccessKeyId' < credentials)
+          	export AWS_SECRET_ACCESS_KEY=$(jq -r '.Credentials.SecretAccessKey' < credentials)
+          	export AWS_SESSION_TOKEN=$(jq -r '.Credentials.SessionToken' < credentials)
+          	cp env-prod/*.auto.tfvars .
+          	terraform init -backend-config=env-prod/state.tfvars
+          	export TF_VAR_env=prod
+          	export TF_VAR_region=us-east-1
+          	terraform plan
+          	terraform destroy
+          	rm -f .terraform/terraform.tfstate
+      ;;
+  "prod-destroy")
+        	rm -rf *auto.tfvars credentials
+        	AWS_ROLE_ARN=$(cat .aws/accounts.json | jq -r ".prod.arn" )
+        	aws sts assume-role --role-arn $AWS_ROLE_ARN --role-session-name prod | tee credentials
+        	echo "Assumed role: $AWS_ROLE_ARN "
+        	export AWS_ACCESS_KEY_ID=$(jq -r '.Credentials.AccessKeyId' < credentials)
+        	export AWS_SECRET_ACCESS_KEY=$(jq -r '.Credentials.SecretAccessKey' < credentials)
+        	export AWS_SESSION_TOKEN=$(jq -r '.Credentials.SessionToken' < credentials)
+        	cp env-prod/*.auto.tfvars .
+        	terraform init -backend-config=env-prod/state.tfvars
+        	export TF_VAR_env=prod
+        	export TF_VAR_region=us-east-1
+        	terraform plan
+        	terraform destroy
+        	rm -f .terraform/terraform.tfstate
+        ;;
   *)
     echo "Invalid option"
     ;;
