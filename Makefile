@@ -2,6 +2,7 @@ dev:
 	rm -rf *auto.tfvars
 	rm -rf credentials
 	AWS_ROLE_ARN=$$(cat .aws/accounts.json| jq ".dev.arn" |sed -e 's/"//g')
+	echo $$AWS_ROLE_ARN
 	aws sts assume-role --role-arn $${AWS_ROLE_ARN} --role-session-name dev > credentials
 	echo $${AWS_ROLE_ARN}
 	export AWS_ACCESS_KEY_ID=$$(cat credentials | jq '.Credentials.AccessKeyId' |sed -e 's/"//g')
