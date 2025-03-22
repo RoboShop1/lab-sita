@@ -4,6 +4,7 @@ module "ec2" {
   ami_id        = each.value["ami_id"]
   instance_type = each.value["instance_type"]
   env           = var.env
+  name          = each.key
 }
 
 

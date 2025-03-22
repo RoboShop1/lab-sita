@@ -4,10 +4,11 @@ resource "aws_instance" "main" {
   instance_type = var.instance_type
 
   tags = {
-    Name = "instance-${var.env}"
+    Name = "${var.name}-${var.env}"
   }
 }
 
 variable "ami_id" {}
 variable "instance_type" {}
 variable "env" {}
+variable "name" {}
