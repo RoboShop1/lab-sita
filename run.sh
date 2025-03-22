@@ -1,4 +1,5 @@
 set -e
+set -o pipefail
 case $1 in
   "dev")
       	rm -rf *auto.tfvars credentials
