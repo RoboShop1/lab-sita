@@ -13,8 +13,5 @@ dev:
 
 
 prod:
-	rm -rf *.tfvars
-	cp env-prod/*.tfvars .
-	terraform init
-	terraform apply -auto-approve
-	rm -rf *.tfvars
+	@name="chaitu" ; \
+	echo "name is $$name
