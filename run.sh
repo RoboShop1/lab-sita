@@ -9,8 +9,8 @@ case $1 in
       	export AWS_SESSION_TOKEN=$(jq -r '.Credentials.SessionToken' < credentials)
       	cp env-dev/*.auto.tfvars .
       	terraform init -backend-config=env-dev/state.tfvars
-      	TF_VAR_env=dev
-      	TF_VAR_region=ap-south-1
+      	export TF_VAR_env=dev
+      	export TF_VAR_region=ap-south-1
       	terraform plan
       	terraform apply
     ;;
