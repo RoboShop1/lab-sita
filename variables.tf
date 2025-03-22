@@ -1,6 +1,5 @@
 variable "region" {}
 variable "ec2" {}
-
 variable "env" {}
 
 #variable "eks" {}
