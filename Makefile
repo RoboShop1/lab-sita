@@ -22,5 +22,5 @@ dev1:
 
 
 all:
-	@AWS_ROLE_ARN=$$(cat .aws/accounts.json | jq -r ".dev.arn"); \
+	AWS_ROLE_ARN=$$(cat .aws/accounts.json | jq -r ".dev.arn"); \
 	aws sts assume-role --role-arn $$AWS_ROLE_ARN --role-session-name dev > credentials
