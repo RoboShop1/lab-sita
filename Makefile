@@ -14,4 +14,5 @@ dev:
 
 prod:
 	@name="chaitu" ; \
-	echo "name is $$name"
+	v=$$name
+	echo "name is $$v"
