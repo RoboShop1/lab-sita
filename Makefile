@@ -19,3 +19,10 @@ dev1:
 	terraform init -backend-config=env-dev/state.tfvars; \
 	TF_VAR_region=ap-south-1 TF_VAR_env=dev terraform apply -auto-approve; \
 	TF_VAR_region=ap-south-1 TF_VAR_env=dev terraform plan
+
+
+all:
+	@AWS_ROLE_ARN=$$(cat .aws/accounts.json | jq -r ".dev.arn"); \
+	DATE=$$(date +%Y-%m-%d); \
+	echo "AWS Role ARN: $$AWS_ROLE_ARN"; \
+	echo "Today's date: $$DATE"
