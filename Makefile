@@ -1,5 +1,5 @@
 dev:
-	rm -rf *.tfvars
+	rm -rf *auto.tfvars
 	rm -rf credentials
 	AWS_ROLE_ARN=$(cat .aws/accounts.json| jq ".dev.arn" |sed -e 's/"//g')
 	aws sts assume-role --role-arn ${AWS_ROLE_ARN} --role-session-name dev > credentials
