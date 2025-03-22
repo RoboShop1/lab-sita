@@ -6,13 +6,10 @@ dev:
 	export AWS_ACCESS_KEY_ID=$(cat credentials | jq '.Credentials.AccessKeyId' |sed -e 's/"//g')
     export AWS_SECRET_ACCESS_KEY=$(cat credentials | jq '.Credentials.SecretAccessKey' |sed -e 's/"//g')
 	export AWS_SESSION_TOKEN=$(cat credentials | jq '.Credentials.SessionToken' | sed -e 's/"//g')
-	terraform init
 	cp env-dev/*.auto.tfvars .
-	terraform apply -auto-approve -e TF_VAR_region=ap-souht-1 -e TF_VAR_env=dev
 	terraform init -backend-config=env-dev/state.tfvars
+	terraform apply -auto-approve -e TF_VAR_region=ap-souht-1 -e TF_VAR_env=dev
 	terraform plan
-	rm -rf *.tfvars
-
 
 prod:
 	rm -rf *.tfvars
