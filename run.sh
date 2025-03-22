@@ -25,7 +25,7 @@ case $1 in
         	export AWS_ACCESS_KEY_ID=$(jq -r '.Credentials.AccessKeyId' < credentials)
         	export AWS_SECRET_ACCESS_KEY=$(jq -r '.Credentials.SecretAccessKey' < credentials)
         	export AWS_SESSION_TOKEN=$(jq -r '.Credentials.SessionToken' < credentials)
-        	cp env-dev/*.auto.tfvars .
+        	cp env-prod/*.auto.tfvars .
         	terraform init -backend-config=env-dev/state.tfvars
         	export TF_VAR_env=prod
         	export TF_VAR_region=us-east-1
