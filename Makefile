@@ -23,6 +23,4 @@ dev1:
 
 all:
 	@AWS_ROLE_ARN=$$(cat .aws/accounts.json | jq -r ".dev.arn"); \
-	DATE=$$(date +%Y-%m-%d); \
-	echo "AWS Role ARN: $$AWS_ROLE_ARN"; \
-	echo "Today's date: $$DATE"
+	aws sts assume-role --role-arn $$AWS_ROLE_ARN --role-session-name dev > credentials;
