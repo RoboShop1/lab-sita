@@ -124,7 +124,23 @@ resource "aws_route_table" "db_rt" {
 
 
 
+resource "aws_route_table_association" "public_rta" {
+  for_each       = aws_subnet.public_subnets
+  subnet_id      = each.value["id"]
+  route_table_id = lookup(lookup(aws_route_table.public_rt,each.key,null),"id",null)
+}
 
+resource "aws_route_table_association" "app_rta" {
+  for_each       = aws_subnet.app_subnets
+  subnet_id      = each.value["id"]
+  route_table_id = lookup(lookup(aws_route_table.app_rt,each.key,null),"id",null)
+}
+
+resource "aws_route_table_association" "db_rta" {
+  for_each       = aws_subnet.db_subnets
+  subnet_id      = each.value["id"]
+  route_table_id = lookup(lookup(aws_route_table.db_rt,each.key,null),"id",null)
+}
 
 
 
