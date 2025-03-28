@@ -56,7 +56,7 @@ output "main" {
 }
 
 output "p" {
-  value = {for i,j in module.vpc["main"]: i => {for m,n in j: m => n.id }}
+  value = module.vpc
 }
 # resource "aws_vpc_security_group_ingress_rule" "example" {
 #   security_group_id = module.vpc.sg_id
