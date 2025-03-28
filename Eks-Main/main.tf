@@ -11,6 +11,10 @@ module "vpc" {
 
 
 
+output "debug" {
+  value = module.vpc["main"]
+}
+
 # resource "aws_instance" "main" {
 #   for_each       =  lookup({for i,j in module.vpc["main"]: i => {for m,n in j: m => n.id } },"public_subnets", null)
 #   ami            =  "ami-0b4f379183e5706b9"
@@ -55,13 +59,13 @@ module "vpc" {
 #   value = module.vpc
 # }
 
-output "p" {
-  value = { for i,j in module.vpc["main"]: i => { for m,n in j: m => n["id"] }}
-}
-
-output "n" {
-  value = {for i,j in module.vpc["main"]: i => {for m,n in j: m => n.id } }
-}
+# output "p" {
+#   value = { for i,j in module.vpc["main"]: i => { for m,n in j: m => n["id"] }}
+# }
+#
+# output "n" {
+#   value = {for i,j in module.vpc["main"]: i => {for m,n in j: m => n.id } }
+# }
 # resource "aws_vpc_security_group_ingress_rule" "example" {
 #   security_group_id = module.vpc.sg_id
 #
