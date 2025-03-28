@@ -12,7 +12,7 @@ module "vpc" {
 
 
 output "debug" {
-  value = type(module.vpc["main"])
+  value = {for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}
 }
 
 # resource "aws_instance" "main" {
