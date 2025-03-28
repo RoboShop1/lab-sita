@@ -7,3 +7,8 @@ module "vpc" {
   app_subnets     = each.value["app_subnets"]
   db_subnets      = each.value["db_subnets"]
 }
+
+
+output "main" {
+  value = module.vpc
+}
