@@ -10,5 +10,5 @@ module "vpc" {
 
 
 output "main" {
-  value =  {for i,j in module.vpc["main"]: i => j}
+  value =  {for i,j in module.vpc["main"]: i => {for m,n in j: m => n.id } }
 }
