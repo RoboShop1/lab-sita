@@ -42,7 +42,7 @@ resource "aws_instance" "app" {
 resource "aws_vpc_security_group_ingress_rule" "example" {
   security_group_id = lookup(module.vpc["main"],"default_security_group_id",null)
 
-  cidr_ipv4   = "0.0.0.0"
+  cidr_ipv4   = "0.0.0.0/0"
   from_port   = 22
   ip_protocol = "tcp"
   to_port     = 22
