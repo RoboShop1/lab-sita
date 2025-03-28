@@ -57,7 +57,7 @@ resource "aws_subnet" "db_subnets" {
 // ******************* //
 
 resource "aws_eip" "eip" {
-  for_each = var.public_subnets
+  for_each = aws_subnet.public_subnets
   domain   = "vpc"
 
   tags = {
