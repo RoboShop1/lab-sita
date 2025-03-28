@@ -12,7 +12,7 @@ module "vpc" {
 
 
 output "debug" {
-  value = module.vpc["main"]
+  value = type(module.vpc["main"])
 }
 
 # resource "aws_instance" "main" {
