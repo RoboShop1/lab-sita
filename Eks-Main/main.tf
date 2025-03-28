@@ -40,7 +40,7 @@ resource "aws_instance" "app" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "example" {
-  security_group_id = module.vpc["main"].default_security_group_id
+  security_group_id = module.vpc["main"]["default_security_group_id"]
 
   cidr_ipv4   = "0.0.0.0"
   from_port   = 22
