@@ -23,6 +23,7 @@ resource "aws_subnet" "public_subnets" {
   for_each          = var.public_subnets
   cidr_block        = each.value["cidr_block"]
   availability_zone = each.value["az"]
+  map_public_ip_on_launch = true
 
   tags = {
     Name = "${var.env}-vpc-${each.key}"
