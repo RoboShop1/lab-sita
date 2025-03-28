@@ -24,7 +24,7 @@ case "$1" in
           fi
        ;;
    *)
-     echo   "Invalid Option"
+     echo   "Invalid Option" ;;
 
 
 
