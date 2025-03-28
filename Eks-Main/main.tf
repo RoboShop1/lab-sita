@@ -9,6 +9,15 @@ module "vpc" {
   db_subnets      = each.value["db_subnets"]
 }
 
+# module "eks" {
+#   for_each                     = var.eks
+#   source                       = "./modules/eks"
+#   env                          = var.env
+#   eks_subnets                  = ""
+#   eks_version                  = each.value["eks_version"]
+#   node_groups                  = each.value["node_groups"]
+#  # node_role_policy_attachments = each.value["node_role_policy_attachments"]
+# }
 
 
 
