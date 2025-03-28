@@ -10,6 +10,6 @@ output "db_subnets" {
   value = aws_subnet.db_subnets
 }
 
-output "sg_id" {
+output "default_security_group_id" {
   value = aws_vpc.main.default_security_group_id
 }

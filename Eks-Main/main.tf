@@ -47,7 +47,7 @@ resource "aws_instance" "db" {
 
 
 output "main" {
-  value = module.vpc.sg_id
+  value = module.vpc
 }
 # resource "aws_vpc_security_group_ingress_rule" "example" {
 #   security_group_id = module.vpc.sg_id
