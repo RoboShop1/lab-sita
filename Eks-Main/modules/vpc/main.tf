@@ -18,7 +18,6 @@ resource "aws_internet_gateway" "igw" {
 // ******************* //
 
 
-
 resource "aws_subnet" "public_subnets" {
   vpc_id            = aws_vpc.main.id
   for_each          = var.public_subnets
