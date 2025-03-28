@@ -85,7 +85,7 @@ resource "aws_nat_gateway" "example" {
 
 resource "aws_route_table" "public_rt" {
   vpc_id     = aws_vpc.main.id
-  for_each   = var.public_subnets
+  for_each   = aws_subnet.public_subnets
 
   tags = {
     Name = "${var.env}-vpc-${each.key}-rt"
@@ -94,7 +94,7 @@ resource "aws_route_table" "public_rt" {
 
 resource "aws_route_table" "app_rt" {
   vpc_id     = aws_vpc.main.id
-  for_each   = var.app_subnets
+  for_each   = aws_subnet.app_subnets
   tags = {
     Name = "${var.env}-vpc-${each.key}-rt"
   }
@@ -102,7 +102,7 @@ resource "aws_route_table" "app_rt" {
 
 resource "aws_route_table" "db_rt" {
   vpc_id     = aws_vpc.main.id
-  for_each   = var.db_subnets
+  for_each   = aws_subnet.db_subnets
   tags = {
     Name = "${var.env}-vpc-${each.key}-rt"
   }
