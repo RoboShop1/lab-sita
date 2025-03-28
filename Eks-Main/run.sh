@@ -17,7 +17,7 @@ case "$1" in
           rm -rf *.auto.tfvars
           exit 1
           fi
-        if [[ "$2" == "apply" ]] ; then
+        if [[ "$2" == "destroy" ]] ; then
           terraform destroy
           rm -rf *.auto.tfvars
           exit 1
