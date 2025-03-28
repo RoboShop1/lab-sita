@@ -86,7 +86,10 @@ resource "aws_nat_gateway" "example" {
 resource "aws_route_table" "public_rt" {
   vpc_id     = aws_vpc.main.id
   for_each   = aws_subnet.public_subnets
-
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
+  }
   tags = {
     Name = "${var.env}-vpc-${each.key}-rt"
   }
@@ -95,6 +98,12 @@ resource "aws_route_table" "public_rt" {
 resource "aws_route_table" "app_rt" {
   vpc_id     = aws_vpc.main.id
   for_each   = aws_subnet.app_subnets
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = can(regex(each.value,1)) ? aws_nat_gateway.example["public1"].id : aws_nat_gateway.example["public2"].id
+  }
+
   tags = {
     Name = "${var.env}-vpc-${each.key}-rt"
   }
@@ -103,6 +112,10 @@ resource "aws_route_table" "app_rt" {
 resource "aws_route_table" "db_rt" {
   vpc_id     = aws_vpc.main.id
   for_each   = aws_subnet.db_subnets
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = can(regex(each.value,1)) ? aws_nat_gateway.example["public1"].id : aws_nat_gateway.example["public2"].id
+  }
   tags = {
     Name = "${var.env}-vpc-${each.key}-rt"
   }
