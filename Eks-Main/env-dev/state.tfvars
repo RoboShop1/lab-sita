@@ -1,4 +1,4 @@
-bucket      = ""
+bucket      = "goodchaitu"
 key         = "dev/terraform.tfstate"
 region      = "us-east-1"
 encrypt     = true
