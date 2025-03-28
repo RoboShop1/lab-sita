@@ -51,12 +51,12 @@ module "vpc" {
 # }
 
 
-output "main" {
-  value = module.vpc
-}
+# output "main" {
+#   value = module.vpc
+# }
 
 output "p" {
-  value = module.vpc
+  value = { for i,j in module.vpc["main"]: i => j }
 }
 # resource "aws_vpc_security_group_ingress_rule" "example" {
 #   security_group_id = module.vpc.sg_id
