@@ -11,42 +11,6 @@ module "vpc" {
 
 
 
-output "debug" {
-  value = {for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}
-}
-
-resource "aws_instance" "main" {
-  for_each       = {for i,j in lookup(module.vpc["main"],"public_subnets",null): i => j.id}
-  ami            =  "ami-0b4f379183e5706b9"
-  instance_type  = "t2.micro"
-  subnet_id      = each.value
-
-
-  tags = {
-    Name = "Instance-${each.key}"
-  }
-}
-
-
-resource "aws_instance" "app" {
-  for_each       =  {for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}
-  ami            =  "ami-0b4f379183e5706b9"
-  instance_type  = "t2.micro"
-  subnet_id      = each.value
-
-  tags = {
-    Name = "Instance-${each.key}"
-  }
-}
-
-resource "aws_vpc_security_group_ingress_rule" "example" {
-  security_group_id = lookup(module.vpc["main"],"default_security_group_id",null)
-
-  cidr_ipv4   = "0.0.0.0/0"
-  from_port   = 22
-  ip_protocol = "tcp"
-  to_port     = 22
-}
 
 
 
