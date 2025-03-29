@@ -67,13 +67,14 @@ resource "aws_vpc_security_group_ingress_rule" "example" {
 }
 
 
-resource "aws_vpc_security_group_ingress_rule" "example" {
+resource "aws_vpc_security_group_ingress_rule" "eks-sg" {
   security_group_id = lookup(module.eks["main"],"eks_sg_id",null)
 
   cidr_ipv4   = "10.0.0.0/16"
   from_port   = 6433
   ip_protocol = "tcp"
   to_port     = 6433
+
 }
 
 
