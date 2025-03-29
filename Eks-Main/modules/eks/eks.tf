@@ -14,6 +14,13 @@ resource "aws_eks_cluster" "example" {
     subnet_ids              = var.eks_subnets
   }
 
+  encryption_config {
+    provider {
+      key_arn = "arn:aws:kms:us-east-1:339712959230:key/1be471bb-5350-4aae-a243-b86099c180a0"
+    }
+    resources = ["secrets"]
+  }
+
   depends_on = [
     aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy,
   ]
