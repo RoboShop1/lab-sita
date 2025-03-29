@@ -14,6 +14,8 @@ output "app_subnets" {
   value = element(values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}),0)
 }
 
+
+
 module "eks" {
   for_each                     = var.eks
   source                       = "./modules/eks"
@@ -25,6 +27,9 @@ module "eks" {
 }
 
 
+output "eks_sg_id" {
+  value = module.eks
+}
 
 resource "aws_instance" "main" {
 #  count         = element(values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}),0)
