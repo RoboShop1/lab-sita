@@ -44,7 +44,7 @@ resource "aws_instance" "main1" {
   ami           = "ami-0b4f379183e5706b9"
   instance_type = "t2.micro"
   subnet_id     = element(values({for i,j in lookup(module.vpc["main"],"public_subnets",null): i => j.id}),0)
-  iam_instance_profile = "arn:aws:iam::339712959230:instance-profile/terraform_role"
+  iam_instance_profile = aws_iam_instance_profile.test_profile.name
 
   tags = {
     Name = "Instance-sample"
