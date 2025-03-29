@@ -67,6 +67,19 @@ resource "aws_vpc_security_group_ingress_rule" "example" {
 }
 
 
+resource "aws_vpc_security_group_ingress_rule" "example" {
+  security_group_id = lookup(module.eks["main"],"eks_sg_id",null)
+
+  cidr_ipv4   = "10.0.0.0/16"
+  from_port   = 22
+  ip_protocol = "tcp"
+  to_port     = 22
+}
+
+
+
+
+
 #
 # resource "aws_instance" "db" {
 #   for_each       =  lookup({for i,j in module.vpc["main"]: i => {for m,n in j: m => n.id } },"db_subnets", null)
