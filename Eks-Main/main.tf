@@ -27,7 +27,7 @@ module "eks" {
 
 
 resource "aws_instance" "main" {
-  count         = element(values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}),0)
+#  count         = element(values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}),0)
   ami           = "ami-0b4f379183e5706b9"
   instance_type = "t2.micro"
   subnet_id     = element(values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}),0)
