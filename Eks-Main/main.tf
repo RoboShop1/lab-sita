@@ -11,7 +11,7 @@ module "vpc" {
 
 
 output "app_subnets" {
-  value = values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id})
+  value = toset(values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}))
 }
 
 module "eks" {
@@ -26,17 +26,17 @@ module "eks" {
 
 
 
-resource "aws_instance" "main" {
-  for_each = toset(values({for i, j in lookup(module.vpc["main"], "public_subnets", null) : i => j.id})[0])
-  ami           = "ami-0b4f379183e5706b9"
-  instance_type = "t2.micro"
-  subnet_id     = each.value
-
-
-  tags = {
-    Name = "Instance-${each.key}"
-  }
-}
+# resource "aws_instance" "main" {
+#   count      = values({for i, j in lookup(module.vpc["main"], "public_subnets", null) : i => j.id})[0]
+#   ami           = "ami-0b4f379183e5706b9"
+#   instance_type = "t2.micro"
+#   subnet_id     =
+#
+#
+#   tags = {
+#     Name = "Instance-${each.key}"
+#   }
+# }
 
 
 resource "aws_vpc_security_group_ingress_rule" "example" {
