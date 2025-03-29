@@ -77,7 +77,7 @@ resource "aws_iam_role" "pod-aasa" {
 
 
 resource "aws_iam_role_policy_attachment" "example_ebs" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSBlockStoragePolicy"
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
   role       = aws_iam_role.pod-aasa.name
 }
 
