@@ -40,7 +40,7 @@ resource "aws_iam_role" "node_main" {
 
 
 resource "aws_iam_role_policy_attachment" "node_role_attachments" {
-  for_each   = toset(lookup(var.node_groups,"node_polices",null))
+  for_each   = toset(var.node_polices)
   role       = aws_iam_role.node_main.name
   policy_arn = each.value
 }

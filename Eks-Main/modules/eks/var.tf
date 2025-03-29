@@ -4,4 +4,5 @@ variable "eks_subnets" {}
 variable "node_groups" {}
 variable "eks_version" {}
 #variable "addons" {}
+variable "node_polices" {}
 

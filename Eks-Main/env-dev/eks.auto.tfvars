@@ -9,13 +9,15 @@ eks = {
         max_size       = 2
         min_size       = 1
         instance_types = ["t3.small"]
-        node_polices   = [
-          "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
-          "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
-          "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
-          "arn:aws:iam::aws:policy/AmazonEKSBlockStoragePolicy"
-        ]
       }
     }
+
+    node_polices   = [
+      "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+      "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+      "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+      "arn:aws:iam::aws:policy/AmazonEKSBlockStoragePolicy"
+    ]
+
   }
 }
