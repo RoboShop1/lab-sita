@@ -24,6 +24,7 @@ module "eks" {
   eks_version                  = each.value["eks_version"]
   node_groups                  = each.value["node_groups"]
   node_polices                 = each.value["node_polices"]
+  addons                       = each.value["addons"]
 }
 
 
