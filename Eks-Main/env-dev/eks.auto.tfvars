@@ -1,10 +1,10 @@
 eks = {
   main = {
-    eks_version = ""
+    eks_version = "1.30"
 
     node_groups = {
       node_group1 = {
-        subnets        = ""
+        subnets        = ["subnet-0972408cb0b198678","subnet-02890fd1149b78261"]
         desired_size   = 2
         max_size       = 2
         min_size       = 1
