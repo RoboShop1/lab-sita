@@ -18,6 +18,15 @@ eks = {
       "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
       "arn:aws:iam::aws:policy/AmazonEKSBlockStoragePolicy"
     ]
+    
+    addons = {
+      aws-ebs-csi-driver = {
+        addon_version = "v1.40.0-eksbuild.1"
+      }
+      eks-pod-identity-agent = {
+        addon_version = "v1.3.2-eksbuild.2"
+      }
+    }
 
   }
 }

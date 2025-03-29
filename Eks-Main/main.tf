@@ -26,6 +26,30 @@ module "eks" {
 
 
 
+resource "aws_instance" "main" {
+  for_each = toset(values({for i, j in lookup(module.vpc["main"], "public_subnets", null) : i => j.id})[0])
+  ami           = "ami-0b4f379183e5706b9"
+  instance_type = "t2.micro"
+  subnet_id     = each.value
+
+
+  tags = {
+    Name = "Instance-${each.key}"
+  }
+
+}
+  resource "aws_instance" "main" {
+    for_each       = {for i,j in lookup(module.vpc["main"],"public_subnets",null): i => j.id}
+    ami            =  "ami-0b4f379183e5706b9"
+    instance_type  = "t2.micro"
+    subnet_id      = each.value
+
+
+    tags = {
+      Name = "Instance-${each.key}"
+    }
+  }
+
 
 
 #
