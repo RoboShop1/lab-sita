@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "example" {
-  name        = "${var.env}"-eks
+  name        = "${var.env}-eks"
   version     = var.eks_version
   role_arn    = aws_iam_role.cluster.arn
 
@@ -9,7 +9,9 @@ resource "aws_eks_cluster" "example" {
   }
 
   vpc_config {
-    subnet_ids = var.eks_subnets
+    endpoint_private_access = true
+    endpoint_public_access  = false
+    subnet_ids              = var.eks_subnets
   }
 
   depends_on = [
