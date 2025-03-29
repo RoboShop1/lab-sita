@@ -27,6 +27,13 @@ module "eks" {
 }
 
 
+module "eks_access" {
+  depends_on = [module.eks]
+  source           = "./modules/eks-access"
+  eks_cluster_name = "dev-eks"
+  aws_eks_access_entry = var.aws_eks_access_entry
+}
+
 output "eks_sg_id" {
   value = module.eks
 }

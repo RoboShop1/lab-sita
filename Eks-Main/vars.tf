@@ -1,4 +1,4 @@
 variable "vpc" {}
 variable "env" {}
 variable "eks" {}
-variable "eks_access" {}
+variable "aws_eks_access_entry" {}
