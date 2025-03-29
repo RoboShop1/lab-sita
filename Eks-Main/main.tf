@@ -11,7 +11,7 @@ module "vpc" {
 
 
 output "app_subnets" {
-  value = toset(values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id})[0])
+  value = toset(values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}))[0]
 }
 
 module "eks" {
