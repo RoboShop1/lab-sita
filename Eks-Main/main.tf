@@ -71,9 +71,8 @@ resource "aws_vpc_security_group_ingress_rule" "eks-sg" {
   security_group_id = lookup(module.eks["main"],"eks_sg_id",null)
 
   cidr_ipv4   = "10.0.0.0/16"
-  from_port   = 0
   ip_protocol = "-1"
-  to_port     = 0
+
 }
 
 
