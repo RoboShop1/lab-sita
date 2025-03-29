@@ -6,4 +6,5 @@ resource "aws_eks_addon" "addons" {
   addon_name                  = each.key
   addon_version               = each.value["addon_version"]
   resolve_conflicts_on_update = "OVERWRITE"
+  service_account_role_arn    = aws_iam_role.pod-aasa.arn
 }
