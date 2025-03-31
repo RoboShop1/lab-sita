@@ -7,10 +7,6 @@ resource "aws_vpc_endpoint" "s3" {
   service_name       = "com.amazonaws.us-east-1.s3"
   route_table_ids    = ["rtb-03c73aa42bbbe049f"]
   vpc_endpoint_type  = "Gateway"
-  security_group_ids = [
-    "sg-00a30a397c35892b0"
-  ]
-
 }
 
 resource "aws_instance" "app" {
