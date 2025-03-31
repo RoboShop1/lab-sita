@@ -5,7 +5,7 @@ data "aws_vpc" "default" {
 resource "aws_vpc_endpoint" "s3" {
   vpc_id             = data.aws_vpc.default.id
   service_name       = "com.amazonaws.us-east-1.s3"
-  route_table_ids    = ["rtb-03c73aa42bbbe049f"]
+  route_table_ids    = ["rtb-03c73aa42bbbe049f","rtb-0bbe806208db871cc"]
   vpc_endpoint_type  = "Gateway"
 }
 
