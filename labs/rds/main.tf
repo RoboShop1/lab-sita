@@ -24,6 +24,7 @@ resource "random_string" "password" {
 
 resource "aws_secretsmanager_secret" "password" {
   name = "RDS_PASS"
+
 }
 
 resource "aws_secretsmanager_secret_version" "password" {
@@ -53,8 +54,8 @@ resource "aws_security_group" "main" {
 
 resource "aws_db_instance" "main" {
   identifier            = "mysql-lab"
-  allocated_storage     = 10
-  max_allocated_storage = 20
+  allocated_storage     = 20
+  max_allocated_storage = 30
   storage_type          = "gp3"
   deletion_protection   = false
   publicly_accessible   = false
