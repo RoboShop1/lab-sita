@@ -51,18 +51,18 @@ resource "aws_instance" "main" {
   }
 }
 
-
-resource "aws_instance" "main1" {
-  #  count         = element(values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}),0)
-  ami           = "ami-0b4f379183e5706b9"
-  instance_type = "t2.micro"
-  subnet_id     = element(values({for i,j in lookup(module.vpc["main"],"public_subnets",null): i => j.id}),0)
-  iam_instance_profile = aws_iam_instance_profile.test_profile.name
-
-  tags = {
-    Name = "Instance-sample"
-  }
-}
+#
+# resource "aws_instance" "main1" {
+#   #  count         = element(values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}),0)
+#   ami           = "ami-0b4f379183e5706b9"
+#   instance_type = "t2.micro"
+#   subnet_id     = element(values({for i,j in lookup(module.vpc["main"],"public_subnets",null): i => j.id}),0)
+#   iam_instance_profile = aws_iam_instance_profile.test_profile.name
+#
+#   tags = {
+#     Name = "Instance-sample"
+#   }
+# }
 
 
 resource "aws_vpc_security_group_ingress_rule" "example" {
@@ -80,7 +80,6 @@ resource "aws_vpc_security_group_ingress_rule" "eks-sg" {
 
   cidr_ipv4   = "10.0.0.0/16"
   ip_protocol = "-1"
-
 }
 
 
