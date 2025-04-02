@@ -59,7 +59,7 @@ resource "aws_db_instance" "main" {
   deletion_protection   = false
   publicly_accessible   = false
   storage_encrypted     = true
-  kms_key_id            = data.aws_kms_key.key_alias.id
+  kms_key_id            = data.aws_kms_key.key_alias.arn
   db_subnet_group_name  = aws_db_subnet_group.default.name
   db_name               = "mydb"
   engine                = "mysql"
