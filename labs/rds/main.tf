@@ -46,7 +46,7 @@ resource "aws_security_group" "main" {
     to_port = 3306
     from_port  = 3306
     protocol  = "TCP"
-    self      = true
+    cidr_blocks = ["172.31.33.114/32"]
   }
 }
 
@@ -71,6 +71,7 @@ resource "aws_db_instance" "main" {
   password              = random_string.password.result
   parameter_group_name  = "default.mysql8.0"
   skip_final_snapshot   = true
+
 
   vpc_security_group_ids = [
     aws_security_group.main.id
