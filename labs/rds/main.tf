@@ -21,6 +21,22 @@ resource "random_string" "password" {
   min_numeric = 0
 }
 
+
+resource "aws_secretsmanager_secret" "password" {
+  name = "RDS_PASSWORD"
+}
+
+resource "aws_secretsmanager_secret_version" "password" {
+  secret_id     = aws_secretsmanager_secret.password.id
+  secret_string = jsonencode(
+    {
+      "master_password" = random_string.password.result
+    }
+  )
+}
+
+
+
 resource "aws_security_group" "main" {
   name = "rds-main"
   vpc_id = data.aws_vpc.default.id
@@ -71,19 +87,6 @@ resource "aws_db_instance" "main" {
   }
 }
 
-
-
-resource "random_id" "snapshot_id" {
-  byte_length = 8
-}
-
-output "string"  {
-  value = random_string.password.result
-}
-
-output "id" {
-  value = random_id.snapshot_id.hex
-}
 
 
 
