@@ -52,7 +52,7 @@ resource "aws_security_group" "main" {
 
 
 resource "aws_db_instance" "main" {
-  identifier            = "Mysql_lab"
+  identifier            = "mysql_lab"
   allocated_storage     = 10
   max_allocated_storage = 20
   storage_type          = "gp3"
