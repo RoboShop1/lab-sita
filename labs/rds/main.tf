@@ -23,7 +23,7 @@ resource "random_string" "password" {
 
 
 resource "aws_secretsmanager_secret" "password" {
-  name = "RDS_PASSWORD"
+  name = "RDS_PASS"
 }
 
 resource "aws_secretsmanager_secret_version" "password" {
