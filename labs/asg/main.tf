@@ -17,6 +17,14 @@ resource "aws_launch_template" "foo" {
     }
   }
 
+  block_device_mappings {
+    device_name = "/dev/sdc"
+
+    ebs {
+      volume_size =  10
+    }
+  }
+
   image_id = "ami-0b4f379183e5706b9"
   instance_type = "t3.micro"
   vpc_security_group_ids = ["sg-0665a56c7cd09a0e0"]
