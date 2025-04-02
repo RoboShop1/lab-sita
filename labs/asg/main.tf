@@ -34,6 +34,15 @@ resource "aws_launch_template" "foo" {
       Name = "Dev_volume"
     }
   }
+
+  tag_specifications {
+    resource_type = "network-interface"
+    tags = {
+      Name = "Dev_net"
+    }
+  }
+
+
   user_data = filebase64("${path.module}/example.sh")
 }
 
