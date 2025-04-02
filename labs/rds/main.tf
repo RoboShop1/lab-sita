@@ -58,7 +58,6 @@ resource "aws_db_instance" "main" {
   vpc_security_group_ids = [
     aws_security_group.main.id
   ]
-
   lifecycle {
     ignore_changes = [
       password,
@@ -66,13 +65,10 @@ resource "aws_db_instance" "main" {
 
     ]
   }
-
   tags = {
     "Environment" = "dev"
     "Name"        = "rds"
   }
-
-
 }
 
 

@@ -9,7 +9,7 @@ provider "random" {
 
 
 resource "random_string" "password" {
-  length = 10
+  length = 15
   special = false
 }
 
