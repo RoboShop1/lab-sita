@@ -1,6 +1,6 @@
 eks = {
   main = {
-    eks_version = "1.30"
+    eks_version = "1.29"
 
     node_groups = {
       node_group1 = {
