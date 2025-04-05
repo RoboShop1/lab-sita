@@ -34,10 +34,10 @@ module "eks_access" {
   depends_on            = [module.eks]
   source                = "./modules/eks-access"
   eks_cluster_name      = "dev-eks"
-  principal_arn         = each.key["principal_arn"]
-  policy_arn            = each.key["policy_arn"]
-  cluster_level         = each.key["cluster_level"]
-  namespaces            = each.key["namespaces"]
+  principal_arn         = each.value["principal_arn"]
+  policy_arn            = each.value["policy_arn"]
+  cluster_level         = each.value["cluster_level"]
+  namespaces            = each.value["namespaces"]
 }
 
 
