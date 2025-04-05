@@ -25,6 +25,9 @@ eks = {
       eks-pod-identity-agent = {
         addon_version = "v1.3.2-eksbuild.2"
       }
+      vpc-cni = {
+        addon_version = "v1.19.2-eksbuild.1"
+      }
     }
     aws_eks_pod_identity_associations ={
       s3 = {
