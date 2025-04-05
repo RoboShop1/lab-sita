@@ -27,6 +27,6 @@ resource "aws_eks_pod_identity_association" "aws_eks_pod_asa" {
   for_each        = aws_iam_role.pod-associations-roles
   cluster_name    = aws_eks_cluster.example.name
   namespace       = lookup(lookup(var.aws_eks_pod_identity_associations,each.key,null),"namespace",null)
-  service_account = lookup(lookup(var.aws_eks_pod_identity_associations,each.key,null),"service_account ",null)
+  service_account = lookup(lookup(var.aws_eks_pod_identity_associations,each.key,null),"service_account",null)
   role_arn        = each.value.arn
 }
