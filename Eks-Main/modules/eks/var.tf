@@ -5,5 +5,5 @@ variable "node_groups" {}
 variable "eks_version" {}
 variable "addons" {}
 variable "node_polices" {}
-
+variable "aws_eks_pod_identity_associations" {}
 
