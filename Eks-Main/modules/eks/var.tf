@@ -5,4 +5,5 @@ variable "node_groups" {}
 variable "eks_version" {}
 variable "addons" {}
 variable "node_polices" {}
+variable "cluster_upgrade" {}
 
