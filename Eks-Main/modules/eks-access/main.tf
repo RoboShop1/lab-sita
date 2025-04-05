@@ -1,22 +1,38 @@
 resource "aws_eks_access_entry" "example" {
-  for_each          = var.aws_eks_access_entry
   cluster_name      = var.eks_cluster_name
-  principal_arn     = each.value["principal_arn"]
+  principal_arn     = var.principal_arn
   type              = "STANDARD"
 }
 
 resource "aws_eks_access_policy_association" "main" {
-  for_each      = aws_eks_access_entry.example
-
+  count         = var.cluster_level ? 1 : 0
   cluster_name  = var.eks_cluster_name
-  policy_arn    = lookup(lookup(var.aws_eks_access_entry,each.key,null),"policy_arn",null)
-  principal_arn = each.value.principal_arn
+  policy_arn    = var.policy_arn
+  principal_arn = var.principal_arn
 
   access_scope {
     type       = "cluster"
   }
 }
 
+resource "aws_eks_access_policy_association" "main" {
+  count         = var.cluster_level ? 0 : 1
+  cluster_name  = var.eks_cluster_name
+  policy_arn    = var.policy_arn
+  principal_arn = var.principal_arn
+
+  access_scope {
+    type       = "namespace"
+    namespaces = var.namespaces
+  }
+}
+
+
 
 variable "eks_cluster_name" {}
-variable "aws_eks_access_entry" {}
+variable "principal_arn" {}
+variable "policy_arn" {}
+variable "cluster_level" {}
+variable "namespaces" {
+  default = null
+}
