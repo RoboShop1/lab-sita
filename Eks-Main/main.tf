@@ -28,17 +28,17 @@ module "eks" {
   aws_eks_pod_identity_associations = each.value["aws_eks_pod_identity_associations"]
 }
 
-#
-# module "eks_access" {
-#   for_each              = var.aws_eks_access_entry
-#   depends_on            = [module.eks]
-#   source                = "./modules/eks-access"
-#   eks_cluster_name      = "dev-eks"
-#   principal_arn         = each.key["principal_arn"]
-#   policy_arn            = each.key["policy_arn"]
-#   cluster_level         = each.key["cluster_level"]
-#   namespaces            = each.key["namespaces"]
-# }
+
+module "eks_access" {
+  for_each              = var.aws_eks_access_entry
+  depends_on            = [module.eks]
+  source                = "./modules/eks-access"
+  eks_cluster_name      = "dev-eks"
+  principal_arn         = each.key["principal_arn"]
+  policy_arn            = each.key["policy_arn"]
+  cluster_level         = each.key["cluster_level"]
+  namespaces            = each.key["namespaces"]
+}
 
 
 
