@@ -1,6 +1,6 @@
 eks = {
   main = {
-    eks_version = "1.29"
+    eks_version = "1.30"
     node_groups = {
       node_group1 = {
         subnets        = ["subnet-0e68e31d30781107f","subnet-0524d7573982a1ed0"]
