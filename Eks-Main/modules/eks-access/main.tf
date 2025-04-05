@@ -4,7 +4,7 @@ resource "aws_eks_access_entry" "example" {
   type              = "STANDARD"
 }
 
-resource "aws_eks_access_policy_association" "main" {
+resource "aws_eks_access_policy_association" "cluster" {
   count         = var.cluster_level ? 1 : 0
   cluster_name  = var.eks_cluster_name
   policy_arn    = var.policy_arn
@@ -15,7 +15,7 @@ resource "aws_eks_access_policy_association" "main" {
   }
 }
 
-resource "aws_eks_access_policy_association" "main" {
+resource "aws_eks_access_policy_association" "namespace" {
   count         = var.cluster_level ? 0 : 1
   cluster_name  = var.eks_cluster_name
   policy_arn    = var.policy_arn
