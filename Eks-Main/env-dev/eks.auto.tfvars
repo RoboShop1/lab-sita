@@ -42,6 +42,12 @@ eks = {
                 "s3-object-lambda:*"
             ],
             "Resource": "*"
+        },
+       {
+          "Sid": "VisualEditor0",
+          "Effect": "Allow",
+          "Action": "eks:*",
+          "Resource": "*"
         }
     ]
 }
