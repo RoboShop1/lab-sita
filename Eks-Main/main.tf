@@ -51,7 +51,7 @@ resource "aws_instance" "main" {
 #  count         = element(values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}),0)
   ami           = "ami-0b4f379183e5706b9"
   instance_type = "t2.micro"
-  subnet_id     = element(values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}),0)
+  subnet_id     = element(values({for i,j in lookup(module.vpc["main"],"public_subnets",null): i => j.id}),0)
   iam_instance_profile = aws_iam_instance_profile.test_profile.name
 
   tags = {
@@ -59,6 +59,10 @@ resource "aws_instance" "main" {
   }
 }
 
+
+output "public" {
+  value = aws_instance.main.public_ip
+}
 
 resource "aws_vpc_security_group_ingress_rule" "example" {
   security_group_id = lookup(module.vpc["main"],"default_security_group_id",null)
