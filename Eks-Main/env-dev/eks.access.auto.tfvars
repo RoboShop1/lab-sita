@@ -3,6 +3,7 @@ aws_eks_access_entry ={
     principal_arn = "arn:aws:iam::339712959230:role/terraform_role"
     policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
     cluster_level = true
+    namespaces    = []
   }
   connect = {
     principal_arn = "arn:aws:iam::339712959230:user/connect"
