@@ -18,7 +18,7 @@ resource "aws_iam_role" "pod-associations-roles" {
   })
   inline_policy {
     name   = each.value["policy_name"]
-    policy = jsonencode(each.value["policy"])
+    policy = each.value["policy"]
   }
 }
 
