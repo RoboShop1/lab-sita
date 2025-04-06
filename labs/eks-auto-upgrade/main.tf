@@ -18,7 +18,7 @@ variable "cluster_upgrade" {
 variable "eks" {
   default = {
     dev  = {
-      eks_version      = "1.29"
+      eks_version      = "1.30"
       eks_subnets      = ["subnet-0843f25967fb0b18d","subnet-0354194ae815795f6"]
       node_polices     = [
         "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
