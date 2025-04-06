@@ -11,7 +11,9 @@ module "eks" {
 }
 
 
-variable "cluster_upgrade" {}
+variable "cluster_upgrade" {
+  default = false
+}
 
 variable "eks" {
   default = {
