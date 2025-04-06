@@ -52,15 +52,15 @@ locals {
 }
 
 
-# resource "null_resource" "cordon_n_drain_node" {
-#   depends_on = [
-#     aws_eks_node_group.eks-node-group-ap_south_blue_1a[0],
-#     aws_eks_node_group.eks-node-group-ap_south_blue_1b[0],
-#     aws_eks_node_group.eks-node-group-ap_south_1a,
-#     aws_eks_node_group.eks-node-group-ap_south_1b,
-#   ]
-#   count = var.upgarde_cluster ? 1 : 0
-#   provisioner "local-exec" {
-#     command = "/bin/sh ${path.module}/workernode_upgrade_prereq.sh ${var.env} ${var.cluster_name} ${local.old_worker_node_version}"
-#   }
-# }
+resource "null_resource" "cordon_n_drain_node" {
+  depends_on = [
+    aws_eks_node_group.node_group_blue_1a[0],
+    aws_eks_node_group.node_group_blue_1b[0],
+    aws_eks_node_group.node_group_1a,
+    aws_eks_node_group.node_group_blue_1b
+  ]
+  count = var.cluster_upgrade ? 1 : 0
+  provisioner "local-exec" {
+    command = "/bin/bash ${path.module}/upgrade.sh ${var.env} eks ${local.old_worker_node_version}"
+  }
+}
