@@ -47,19 +47,17 @@ resource "aws_eks_node_group" "node_group_blue_1b" {
   }
 }
 
-# locals {
-#   old_worker_node_version = var.k8_version == "1.22" ? "v1.21.14-eks-fb459a0" : "v1.22.15-eks-fb459a0"
-# }
+locals {
+  old_worker_node_version = "v1.29.13-eks-5d632ec"
+}
 
 
 # resource "null_resource" "cordon_n_drain_node" {
 #   depends_on = [
 #     aws_eks_node_group.eks-node-group-ap_south_blue_1a[0],
 #     aws_eks_node_group.eks-node-group-ap_south_blue_1b[0],
-#     aws_eks_node_group.eks-node-group-ap_south_blue_1c[0],
 #     aws_eks_node_group.eks-node-group-ap_south_1a,
 #     aws_eks_node_group.eks-node-group-ap_south_1b,
-#     aws_eks_node_group.eks-node-group-ap_south_1c
 #   ]
 #   count = var.upgarde_cluster ? 1 : 0
 #   provisioner "local-exec" {
