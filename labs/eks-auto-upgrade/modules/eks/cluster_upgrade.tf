@@ -1,4 +1,4 @@
-resource "aws_eks_node_group" "node_group_1a" {
+resource "aws_eks_node_group" "node_group_blue_1a" {
   count           = var.cluster_upgrade ? 1 : 0
   cluster_name    = aws_eks_cluster.example.name
   node_group_name = "${var.env}-eks-node-group-blue-1a"
@@ -23,7 +23,7 @@ resource "aws_eks_node_group" "node_group_1a" {
 }
 
 
-resource "aws_eks_node_group" "node_group_1a" {
+resource "aws_eks_node_group" "node_group_blue_1a" {
   count           = var.cluster_upgrade ? 1 : 0
   cluster_name    = aws_eks_cluster.example.name
   node_group_name = "${var.env}-eks-node-group-blue-1b"
