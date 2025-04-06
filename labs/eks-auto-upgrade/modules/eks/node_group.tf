@@ -23,7 +23,7 @@ resource "aws_eks_node_group" "node_group_1a" {
 }
 
 
-resource "aws_eks_node_group" "node_group_1a" {
+resource "aws_eks_node_group" "node_group_1b" {
   cluster_name    = aws_eks_cluster.example.name
   node_group_name = "${var.env}-eks-node-group-1b"
   node_role_arn   = aws_iam_role.node_main.arn
