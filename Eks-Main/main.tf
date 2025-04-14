@@ -101,9 +101,11 @@ resource "null_resource" "main" {
   }
 
   provisioner "remote-exec" {
-    command =<<EOT
-   aws eks update-kubeconfig  --name dev-eks --region us-east-1
-EOT
+    inline = [
+      "aws eks update-kubeconfig  --name dev-eks --region us-east-1",
+
+
+    ]
 
   }
   }
