@@ -74,12 +74,12 @@ resource "aws_vpc_security_group_ingress_rule" "example" {
 
 
 
-# resource "aws_vpc_security_group_ingress_rule" "eks-sg" {
-#   security_group_id = lookup(module.eks["main"],"eks_sg_id",null)
-#   cidr_ipv4   = "10.0.0.0/16"
-#   ip_protocol = "-1"
-# }
-
+resource "aws_vpc_security_group_ingress_rule" "eks-sg" {
+  security_group_id = lookup(module.eks["main"],"eks_sg_id",null)
+  from_port = 443
+  to_port = 443
+  cidr_ipv4 = "10.0.1.6/32"
+}
 
 
 
