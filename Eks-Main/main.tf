@@ -1,4 +1,11 @@
-
+terraform {
+  required_providers {
+    null = {
+      source  = "hashicorp/null"
+      version = "3.2.2"
+    }
+  }
+}
 module "vpc" {
   source          = "./modules/vpc"
   for_each        = var.vpc
@@ -84,6 +91,22 @@ resource "aws_vpc_security_group_ingress_rule" "eks-sg" {
 
 
 
+resource "null_resource" "main" {
+
+  connection {
+    type     = "ssh"
+    user     = "centos"
+    password = "DevOps321"
+    host     = aws_instance.main.public_ip
+  }
+
+  provisioner "remote-exec" {
+    command =<<EOT
+   aws eks update-kubeconfig  --name dev-eks --region us-east-1
+EOT
+
+  }
+  }
 
 
 
