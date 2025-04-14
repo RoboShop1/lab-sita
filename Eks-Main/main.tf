@@ -79,7 +79,7 @@ resource "aws_vpc_security_group_ingress_rule" "eks-sg" {
   from_port = 443
   to_port = 443
   ip_protocol = "tcp"
-  cidr_ipv4 = "10.0.1.6/32"
+  cidr_ipv4 = "10.0.2.6/32"
 }
 
 
