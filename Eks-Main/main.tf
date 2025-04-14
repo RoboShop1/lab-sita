@@ -89,6 +89,28 @@ resource "aws_vpc_security_group_ingress_rule" "eks-sg" {
 }
 
 
+# resource "null_resource" "tools-install" {
+#
+#   connection {
+#     type     = "ssh"
+#     user     = "centos"
+#     password = "DevOps321"
+#     host     = aws_instance.main.public_ip
+#   }
+#
+#   provisioner "remote-exec" {
+#     inline = [
+#       "sudo labauto kubectl",
+#       "sudo labauto helm",
+#       "sudo labauto k9s"
+#     ]
+#
+#   }
+# }
+
+
+
+
 
 
 resource "null_resource" "main" {
@@ -103,10 +125,9 @@ resource "null_resource" "main" {
   provisioner "remote-exec" {
     inline = [
       "aws eks update-kubeconfig  --name dev-eks --region us-east-1",
-
-
+      "helm repo add external-dns https://kubernetes-sigs.github.io/external-dns/",
+      "helm upgrade --install external-dns external-dns/external-dns --version 1.16.1 --set serviceAccount.name=external-dns-sa"
     ]
-
   }
   }
 
