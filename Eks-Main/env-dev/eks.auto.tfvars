@@ -252,39 +252,39 @@ EOT
 EOT
 
       }
-#       external-dns = {
-#         namespace       = "test-ns"
-#         service_account = "test-sa"
-#         policy_name     = "s3_readonly_policy"
-#         policy          = <<EOT
-# {
-#   "Version": "2012-10-17",
-#   "Statement": [
-#     {
-#       "Effect": "Allow",
-#       "Action": [
-#         "route53:ChangeResourceRecordSets"
-#       ],
-#       "Resource": [
-#         "arn:aws:route53:::hostedzone/*"
-#       ]
-#     },
-#     {
-#       "Effect": "Allow",
-#       "Action": [
-#         "route53:ListHostedZones",
-#         "route53:ListResourceRecordSets",
-#         "route53:ListTagsForResources"
-#       ],
-#       "Resource": [
-#         "*"
-#       ]
-#     }
-#   ]
-# }
-# EOT
-#
-#       }
+      external-dns = {
+        namespace       = "default"
+        service_account = "external-dns-sa"
+        policy_name     = "external_dns_policy"
+        policy          = <<EOT
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:ChangeResourceRecordSets"
+      ],
+      "Resource": [
+        "arn:aws:route53:::hostedzone/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:ListHostedZones",
+        "route53:ListResourceRecordSets",
+        "route53:ListTagsForResources"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}
+EOT
+
+      }
 
 
     }
