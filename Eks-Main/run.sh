@@ -1,5 +1,3 @@
-
-
 case "$1" in
     "dev")
         rm -rf *.auto.tfvars

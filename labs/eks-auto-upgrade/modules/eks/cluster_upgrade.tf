@@ -1,3 +1,5 @@
+# cluster upgrade in blue-green method
+
 resource "aws_eks_node_group" "node_group_blue_1a" {
   count           = var.cluster_upgrade ? 1 : 0
   cluster_name    = aws_eks_cluster.example.name
