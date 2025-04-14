@@ -114,9 +114,9 @@ resource "aws_vpc_security_group_ingress_rule" "eks-sg" {
 
 
 resource "null_resource" "main" {
-  triggers = {
-    name = timestamp()
-  }
+  # triggers = {
+  #   name = timestamp()
+  # }
   connection {
     type     = "ssh"
     user     = "centos"
