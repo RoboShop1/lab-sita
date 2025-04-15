@@ -20,14 +20,14 @@ resource "aws_iam_role" "iam_for_lambda" {
 data "archive_file" "lambda" {
   type        = "zip"
   source_file = "${path.module}/python/"
-  output_path = "${path.module}/python/name.zip"
+  output_path = "${path.module}/python/sample.zip"
 }
 
 resource "aws_lambda_function" "test_lambda" {
   filename      = "${path.module}/python/name.zip"
   function_name = "sample"
   role          = aws_iam_role.iam_for_lambda.arn
-  handler       = "name.lambda_handler"
+  handler       = "sample.lambda_handler"
   source_code_hash = data.archive_file.lambda.output_base64sha256
   runtime = "python3.11"
   timeout = "60"
