@@ -4,11 +4,13 @@ import json
 from jinja2 import Template
 
 def lambda_handler(event, context):
-    name = event["name"]
+    #name = event["name"]
+    print(type(event))
+    print(event)
 
-    template = Template("Hello, {{ name }}!")
-    message = template.render(name=name)
-    print(message)
+#     template = Template("Hello, {{ name }}!")
+#     message = template.render(name=name)
+#     print(message)
 
     return {
         "statusCode": 200,
