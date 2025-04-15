@@ -1,7 +1,16 @@
 import requests
 import json
 
-def lambda_handler(event,context):
-    x = requests.get('https://jsonplaceholder.typicode.com/posts/1')
+from jinja2 import Template
 
-    print(x)
+def lambda_handler(event, context):
+    name = event["name"]
+
+    template = Template("Hello, {{ name }}!")
+    message = template.render(name=name)
+    print(message)
+
+    return {
+        "statusCode": 200,
+        "body": message
+    }
