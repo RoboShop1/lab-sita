@@ -97,7 +97,8 @@ resource "null_resource" "tools-install" {
     inline = [
       "sudo labauto kubectl",
       "sudo labauto helm",
-      "sudo labauto k9s"
+      "sudo labauto k9s",
+      "aws eks update-kubeconfig  --name dev-eks --region us-east-1"
     ]
   }
 }
