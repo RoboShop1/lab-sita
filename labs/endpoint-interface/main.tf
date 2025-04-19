@@ -48,3 +48,7 @@ resource "aws_instance" "main" {
     Name = "one"
   }
 }
+
+output "private_ip" {
+  value = aws_instance.main.private_ip
+}
