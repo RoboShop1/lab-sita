@@ -41,6 +41,10 @@ resource "aws_iam_access_key" "access-chaitu" {
   user    = aws_iam_user.r.name
 }
 
+resource "aws_iam_access_key" "access-r" {
+  user    = aws_iam_user.c.name
+}
+
 resource "null_resource" "chaitu" {
 
   triggers = {
@@ -48,8 +52,9 @@ resource "null_resource" "chaitu" {
   }
   provisioner "local-exec" {
     command = <<EOT
-echo "Hello-chaitu"
-echo "one"
+
+bash -c 'mkdir -p /tmp && echo "id = ${aws_iam_access_key.access-r.id}" > /tmp/100.txt && echo "secret = ${aws_iam_access_key.access-r.secret}" >> /tmp/100.txt'
+
 EOT
   }
 }
