@@ -82,6 +82,17 @@ resource "aws_iam_user_policy" "main-chaitu" {
             "ssm:resourceTag/access": "chaitu"
           }
         }
+      },
+      {
+        "Sid": "VisualEditor0",
+        "Effect": "Allow",
+        "Action": "ec2:*",
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "aws:RequestedRegion": "ap-south-1"
+          }
+        }
       }
     ]
   })
