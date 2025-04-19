@@ -22,6 +22,7 @@ data "aws_vpc" "default" {
 resource "aws_security_group" "ec2-sg" {
   name = "ec2-sg"
   description = "Allow ec2"
+  vpc_id = data.aws_vpc.default.id
 
   ingress {
     from_port = 22
@@ -39,17 +40,17 @@ resource "aws_security_group" "ec2-sg" {
 
 }
 
-resource "aws_instance" "main" {
-  ami = "ami-0b4f379183e5706b9"
-  instance_type = "t3.small"
-  subnet_id = "subnet-0843f25967fb0b18d"
-  vpc_security_group_ids = [aws_security_group.ec2-sg.id]
-  iam_instance_profile = aws_iam_instance_profile.test_profile.name
-
-  tags = {
-    Name = "one"
-  }
-}
+# resource "aws_instance" "main" {
+#   ami = "ami-0b4f379183e5706b9"
+#   instance_type = "t3.small"
+#   subnet_id = "subnet-0843f25967fb0b18d"
+#   vpc_security_group_ids = [aws_security_group.ec2-sg.id]
+#   iam_instance_profile = aws_iam_instance_profile.test_profile.name
+#
+#   tags = {
+#     Name = "one"
+#   }
+# }
 
 
 resource "aws_instance" "two" {
