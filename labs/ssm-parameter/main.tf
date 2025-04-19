@@ -90,7 +90,7 @@ resource "aws_iam_user_policy" "main-chaitu" {
         "Resource": "*",
         "Condition": {
           "StringEquals": {
-            "aws:RequestedRegion": "ap-south-1"
+            "aws:RequestedRegion": "us-east-1"
           }
         }
       }
