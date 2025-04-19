@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    null = {
+      source  = "hashicorp/null"
+      version = "3.2.2"
+    }
+  }
+}
 # resource "aws_ssm_parameter" "foo" {
 #   for_each = var.parameters
 #
@@ -28,6 +36,21 @@ resource "aws_iam_user" "c" {
     access = "chaitu"
   }
 }
+
+resource "aws_iam_access_key" "access-chaitu" {
+  user    = aws_iam_user.r.name
+}
+
+resource "null_resource" "chaitu" {
+  provisioner "local-exec" {
+    commad = <<EOT
+"echo ${aws_iam_access_key.access-chaitu.id} >  100.txt"
+"echo ${aws_iam_access_key.access-chaitu.secret} >  100.txt"
+EOT
+  }
+}
+
+
 
 resource "aws_iam_user_policy" "main-chaitu" {
   name = "ssm-chaitu-policy"
