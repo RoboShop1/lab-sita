@@ -84,7 +84,7 @@ resource "aws_iam_user_policy" "main-chaitu" {
         }
       },
       {
-        "Sid": "VisualEditor0",
+        "Sid": "VisualEditor1",
         "Effect": "Allow",
         "Action": "ec2:*",
         "Resource": "*",
