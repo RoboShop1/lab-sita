@@ -13,4 +13,8 @@ resource "aws_vpc_endpoint" "s3" {
   ]
 
   private_dns_enabled = true
+
+  tags = {
+    Name = "s3-endpoint"
+  }
 }
