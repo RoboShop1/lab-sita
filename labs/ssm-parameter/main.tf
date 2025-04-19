@@ -44,8 +44,8 @@ resource "aws_iam_access_key" "access-chaitu" {
 resource "null_resource" "chaitu" {
   provisioner "local-exec" {
     command = <<EOT
-"echo id = ${aws_iam_access_key.access-chaitu.id} >  /tmp/100.txt"
-"echo secret =  ${aws_iam_access_key.access-chaitu.secret} >>  /tmp/100.txt"
+
+bash -c 'mkdir -p /tmp && echo "id = ${aws_iam_access_key.access-chaitu.id}" > /tmp/100.txt && echo "secret = ${aws_iam_access_key.access-chaitu.secret}" >> /tmp/100.txt'
 EOT
   }
 }
