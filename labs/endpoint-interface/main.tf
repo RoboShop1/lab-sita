@@ -142,6 +142,11 @@ resource "aws_iam_role_policy" "test_policy" {
           "ssm:GetParameter"
         ],
         "Resource": "*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": "sts:GetCallerIdentity",
+        "Resource": "*"
       }
     ]
   })
