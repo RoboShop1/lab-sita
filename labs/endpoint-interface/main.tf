@@ -66,10 +66,26 @@ resource "aws_instance" "two" {
 }
 
 
+resource "aws_instance" "three" {
+  ami = "ami-0b4f379183e5706b9"
+  instance_type = "t3.small"
+  subnet_id = "subnet-0e4185a248d6d0b4b"
+  vpc_security_group_ids = [aws_security_group.ec2-sg.id]
+  iam_instance_profile = aws_iam_instance_profile.test_profile.name
+
+  tags = {
+    Name = "three"
+  }
+}
 
 
 
-output "private_ip" {
+output "two_ip" {
+  value = aws_instance.two.private_ip
+}
+
+
+output "three_ip" {
   value = aws_instance.two.private_ip
 }
 
