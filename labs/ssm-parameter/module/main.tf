@@ -4,6 +4,7 @@ resource "aws_ssm_parameter" "foo" {
   name  = each.key
   type  = "String"
   value = each.value
+  overwrite = true
 
   tags = {
     Name   = "${each.key}"
