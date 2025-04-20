@@ -69,3 +69,24 @@ resource "aws_route_table" "app-rt" {
 }
 
 
+
+resource "aws_subnet" "db_subnets" {
+  for_each          = var.db_subnets
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = each.value["cidr_block"]
+  availability_zone = each.value["az"]
+
+  tags = {
+    Name = "${var.env}-vpc-${each.key}-subnet"
+  }
+}
+
+
+resource "aws_route_table" "app-rt" {
+  for_each = aws_subnet.db_subnets
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "${var.env}-vpc-${each.key}-rt"
+  }
+}

@@ -5,6 +5,7 @@ module "vpc" {
   env            = each.key
   public_subnets = each.value["public_subnets"]
   app_subnets    = each.value["app_subnets"]
+  db_subnets     = each.value["db_subnets"]
 }
 
 
@@ -20,6 +21,10 @@ variable "vpc" {
       app_subnets = {
         app1 = { cidr_block = "10.0.3.0/24" , az = "us-east-1a" }
         app2 = { cidr_block = "10.0.4.0/24" , az = "us-east-1b" }
+      }
+      db_subnets = {
+        db1 = { cidr_block = "10.0.5.0/24" , az = "us-east-1a" }
+        db2 = { cidr_block = "10.0.6.0/24" , az = "us-east-1b" }
       }
     }
   }
