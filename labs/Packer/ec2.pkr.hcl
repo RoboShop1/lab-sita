@@ -17,7 +17,7 @@ source "amazon-ebs" "basic-example" {
 
   instance_type = "t3.small"
 
-  source_ami    = "i-0dc6ce6f7933ab154"
+  source_ami    = "ami-0b4f379183e5706b9"
   tags = {
     Name = "chaitu-custom"
   }
