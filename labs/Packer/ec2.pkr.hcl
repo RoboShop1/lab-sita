@@ -11,7 +11,7 @@ packer {
 
 
 source "amazon-ebs" "basic-example" {
-  ami_name = "chaitu-custom"
+  ami_name = "chaitu-custom-{{timestamp}}"
   force_deregister = true
   force_delete_snapshot = true
 
