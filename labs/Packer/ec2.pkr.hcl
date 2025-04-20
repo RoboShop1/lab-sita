@@ -32,6 +32,13 @@ source "amazon-ebs" "basic-example" {
     delete_on_termination = true
   }
 
+  launch_block_device_mappings {
+    device_name = "/dev/sdg"
+    volume_size = 10
+    delete_on_termination = true
+  }
+
+
   communicator = "ssh"
   ssh_username = "centos"
   ssh_password = "DevOps321"
