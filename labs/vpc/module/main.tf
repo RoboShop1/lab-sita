@@ -63,7 +63,6 @@ resource "aws_route_table" "app-rt" {
   for_each = aws_subnet.app_subnets
   vpc_id = aws_vpc.main.id
 
-
   tags = {
     Name = "${var.env}-vpc-${each.key}-rt"
   }
