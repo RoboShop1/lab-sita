@@ -25,10 +25,12 @@ source "amazon-ebs" "basic-example" {
   run_tags = {
     Name = "RunAMI"
   }
+
   launch_block_device_mappings {
     device_name = "/dev/sdf"
     volume_size = 10
   }
+
   communicator = "ssh"
   ssh_username = "centos"
   ssh_password = "DevOps321"
@@ -40,4 +42,17 @@ build {
   sources = [
     "source.amazon-ebs.basic-example"
   ]
+
+  provisioner "shell" {
+    environment_vars = [
+      "FOO=hello world",
+    ]
+    inline = [
+      "echo Installing nginx",
+      "sudo dnf install nginx",
+      "sudo systemctl start nginx",
+      "sudo systemctl enable nginx"
+    ]
+  }
+
 }
