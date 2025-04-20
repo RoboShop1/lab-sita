@@ -49,7 +49,7 @@ build {
     ]
     inline = [
       "echo Installing nginx",
-      "sudo dnf install nginx",
+      "sudo dnf install nginx -y",
       "sudo systemctl start nginx",
       "sudo systemctl enable nginx"
     ]
