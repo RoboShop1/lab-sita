@@ -10,6 +10,11 @@ module "vpc" {
 
 
 
+
+output "all" {
+  value = module.vpc
+}
+
 variable "vpc" {
   default = {
     dev = {
