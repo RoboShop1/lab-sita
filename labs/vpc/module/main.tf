@@ -15,6 +15,8 @@ resource "aws_internet_gateway" "igw" {
 }
 
 
+
+
 resource "aws_subnet" "public_subnets" {
   for_each          = var.public_subnets
   vpc_id            = aws_vpc.main.id
@@ -42,6 +44,26 @@ resource "aws_route_table" "public-rt" {
   }
 }
 
+resource "aws_eip" "eip" {
+  for_each = aws_subnet.public_subnets
+  domain   = "vpc"
+
+  tags = {
+    Name = "${var.env}-vpc-${each.key}-eip"
+  }
+}
+
+
+resource "aws_nat_gateway" "nat-gw" {
+  for_each      = aws_subnet.public_subnets
+
+  allocation_id = lookup(lookup(aws_eip.eip,each.key,null),id,null)
+  subnet_id     = each.value["id"]
+
+  tags = {
+    Name = "${var.env}-vpc-${each.key}-nat"
+  }
+}
 
 
 // **** app subnets **** //
