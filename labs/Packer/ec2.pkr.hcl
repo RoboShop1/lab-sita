@@ -54,6 +54,7 @@ build {
       "sudo systemctl start nginx",
       "sudo systemctl enable nginx",
       "sudo dnf install git -y",
+      "sudo dnf install wget -y"
     ]
   }
 
