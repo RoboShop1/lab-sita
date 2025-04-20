@@ -82,7 +82,7 @@ resource "aws_subnet" "db_subnets" {
 }
 
 
-resource "aws_route_table" "app-rt" {
+resource "aws_route_table" "db-rt" {
   for_each = aws_subnet.db_subnets
   vpc_id = aws_vpc.main.id
 
