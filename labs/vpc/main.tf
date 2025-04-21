@@ -27,7 +27,7 @@ output "all" {
 
 
 output "data" {
-  value = { for i,j in lookup(lookup(module.vpc, "dev",null),"public_subnets",null): i => j}
+  value = { for i,j in lookup(lookup(module.vpc, "dev",null),"public_subnets",null): i => j["id"]}
 }
 # output "data" {
 #   value = {for i,j in lookup(module.vpc, "dev",null): i => {for m,n in j: m => lookup(n,"id",null)} }
