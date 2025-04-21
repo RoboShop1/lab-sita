@@ -1,6 +1,7 @@
 resource "random_string" "random" {
   length           = 16
-  special          = false
+  special          = true
+  override_special = "!@"
 }
 
 
