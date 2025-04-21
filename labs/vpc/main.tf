@@ -200,7 +200,7 @@ resource "aws_security_group" "app" {
 
 
 variable "sg1" {
-  default = [22,80]
+  default = [22,80,25]
 }
 
 resource "aws_security_group" "app1" {
@@ -232,7 +232,6 @@ variable "sg2" {
   default = {
     ssh = 22
     web = 80
-    smtp = 25
   }
 }
 
