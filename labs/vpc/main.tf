@@ -28,8 +28,9 @@ output "public_subnets" {
 
 
 resource "aws_security_group" "public" {
-  name = "public_sg"
+  name        = "public_sg"
   description = "for public-subnets"
+  vpc_id      = lookup(lookup(module.vpc, "dev",null),"vpc_id",null)
 
   ingress {
     from_port = 22
@@ -50,6 +51,7 @@ resource "aws_security_group" "public" {
 resource "aws_security_group" "app" {
   name = "app_sg"
   description = "for public-subnets"
+  vpc_id      = lookup(lookup(module.vpc, "dev",null),"vpc_id",null)
 
   ingress {
     from_port = 22
