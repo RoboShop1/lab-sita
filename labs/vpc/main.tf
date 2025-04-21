@@ -203,7 +203,7 @@ variable "sg1" {
   default = [22,80]
 }
 
-resource "aws_security_group" "app" {
+resource "aws_security_group" "app1" {
   name = "app_sg1"
   description = "for public-subnets"
 
