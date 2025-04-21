@@ -50,4 +50,5 @@ data "aws_secretsmanager_secret_version" "by-version-stage" {
 
 output "fix" {
   value = data.aws_secretsmanager_secret_version.by-version-stage.secret_string
+  sensitive = true
 }
