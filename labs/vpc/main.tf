@@ -79,7 +79,7 @@ resource "aws_instance" "public_subnets" {
   instance_type = "t2.micro"
   subnet_id     = each.value
 
-  vpc_security_group_ids = [aws_security_group.public]
+  vpc_security_group_ids = [aws_security_group.public.id]
 
   tags = {
     Name = "${each.key}"
@@ -94,7 +94,7 @@ resource "aws_instance" "app_subnets" {
   instance_type = "t2.micro"
   subnet_id     = each.value
 
-  vpc_security_group_ids = [aws_security_group.app]
+  vpc_security_group_ids = [aws_security_group.app.id]
 
   tags = {
     Name = "${each.key}"
