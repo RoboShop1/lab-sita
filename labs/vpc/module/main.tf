@@ -70,6 +70,10 @@ output "eip" {
   value = aws_eip.eip
 }
 
+output "nat" {
+  value = aws_nat_gateway.nat-gw
+}
+
 
 // **** app subnets **** //
 
