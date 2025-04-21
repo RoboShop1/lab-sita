@@ -57,7 +57,7 @@ resource "aws_eip" "eip" {
 resource "aws_nat_gateway" "nat-gw" {
   for_each      = aws_subnet.public_subnets
 
-  allocation_id = lookup(lookup(aws_eip.eip,each.key,null),id,null)
+  allocation_id = lookup(lookup(aws_eip.eip,each.key,null),"id",null)
   subnet_id     = each.value["id"]
 
   tags = {
