@@ -41,6 +41,11 @@ resource "aws_subnet" "app_subnets" {
   }
 }
 
+
+
+
+
+
 resource "aws_subnet" "db_subnets" {
   vpc_id            = aws_vpc.main.id
   for_each          = var.db_subnets

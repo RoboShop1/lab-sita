@@ -44,6 +44,14 @@ resource "aws_route_table" "public-rt" {
   }
 }
 
+
+resource "aws_route_table_association" "public-rt-a" {
+  for_each       = aws_subnet.public_subnets
+  subnet_id      = each.value["id"]
+  route_table_id = lookup(lookup(aws_route_table.public-rt,each.key,null),"id",null)
+}
+
+
 resource "aws_eip" "eip" {
   for_each = aws_subnet.public_subnets
   domain   = "vpc"
@@ -105,6 +113,13 @@ resource "aws_route_table" "app-rt" {
 }
 
 
+resource "aws_route_table_association" "app-rt-a" {
+  for_each       = aws_subnet.app_subnets
+  subnet_id      = each.value["id"]
+  route_table_id = lookup(lookup(aws_route_table.app-rt,each.key,null),"id",null)
+}
+
+
 
 resource "aws_subnet" "db_subnets" {
   for_each          = var.db_subnets
@@ -130,4 +145,10 @@ resource "aws_route_table" "db-rt" {
   tags = {
     Name = "${var.env}-vpc-${each.key}-rt"
   }
+}
+
+resource "aws_route_table_association" "db-rt-a" {
+  for_each       = aws_subnet.db_subnets
+  subnet_id      = each.value["id"]
+  route_table_id = lookup(lookup(aws_route_table.db-rt,each.key,null),"id",null)
 }
