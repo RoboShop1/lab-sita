@@ -101,7 +101,7 @@ resource "aws_instance" "public_subnets" {
 
 resource "aws_instance" "app_subnets" {
 
-  for_each      = lookup({for i,j in lookup(module.vpc, "dev",null): i => {for m,n in j: m => n["id"]} },"app_subnets",null)
+  for_each      = { for i,j in lookup(lookup(module.vpc, "dev",null),"app_subnets",null): i => j["id"]}
   ami           = "ami-0b4f379183e5706b9"
   instance_type = "t2.micro"
   subnet_id     = each.value
@@ -113,6 +113,11 @@ resource "aws_instance" "app_subnets" {
   }
 }
 
+
+
+output "app_instances" {
+  value = ""
+}
 
 
 
