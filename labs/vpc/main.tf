@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.54.1"
+    }
+  }
+}
 module "vpc" {
   for_each       = var.vpc
   source         = "./module"
@@ -19,6 +27,26 @@ output "all" {
 output "data" {
   value = {for i,j in lookup(module.vpc, "dev",null): i => {for m,n in j: m => n["id"]} }
 }
+
+
+output "public_subnets" {
+  value = lookup({for i,j in lookup(module.vpc, "dev",null): i => {for m,n in j: m => n["id"]} },"public_subnets",null)
+}
+
+
+
+
+resource "aws_instance" "public_subnets" {
+  for_each =
+  ami = ""
+  instance_type = ""
+
+  tags = {
+    Name = "${each.key}"
+  }
+}
+
+
 variable "vpc" {
   default = {
     dev = {
