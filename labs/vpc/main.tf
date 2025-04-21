@@ -1,4 +1,4 @@
-}
+
 module "vpc" {
   for_each       = var.vpc
   source         = "./module"
