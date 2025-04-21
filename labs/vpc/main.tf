@@ -116,12 +116,12 @@ resource "aws_instance" "app_subnets" {
 
 
 output "app_instances" {
-  value = aws_instance.app_subnets
+  value = {for i,j in aws_instance.app_subnets: i => j.public_ip}
 }
 
 
 output "public_instances" {
-  value = aws_instance.public_subnets
+  value = { for i,j in aws_instance.public_subnets: i => j.public_ip }
 }
 
 
