@@ -94,6 +94,11 @@ resource "aws_route_table" "app-rt" {
   for_each = aws_subnet.app_subnets
   vpc_id = aws_vpc.main.id
 
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = can(regex(1,each.key)) ? aws_nat_gateway.nat-gw["public1"].id: aws_nat_gateway.nat-gw["public2"].id
+  }
+
   tags = {
     Name = "${var.env}-vpc-${each.key}-rt"
   }
@@ -116,6 +121,11 @@ resource "aws_subnet" "db_subnets" {
 resource "aws_route_table" "db-rt" {
   for_each = aws_subnet.db_subnets
   vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = can(regex(1,each.key)) ? aws_nat_gateway.nat-gw["public1"].id: aws_nat_gateway.nat-gw["public2"].id
+  }
 
   tags = {
     Name = "${var.env}-vpc-${each.key}-rt"
