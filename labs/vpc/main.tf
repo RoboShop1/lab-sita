@@ -20,7 +20,7 @@ output "all" {
 
 
 output "data" {
-  value = { for i,j in lookup(module.vpc, "dev",null): i => j }
+  value = { for i,j in lookup(module.vpc, "dev",null): i => {for  l,k in j: l => j } }
 }
 # output "data" {
 #   value = {for i,j in lookup(module.vpc, "dev",null): i => {for m,n in j: m => lookup(n,"id",null)} }
