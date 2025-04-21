@@ -200,7 +200,7 @@ resource "aws_security_group" "app" {
 
 
 variable "sg1" {
-  default = [22,80,25]
+  default = [22,80]
 }
 
 resource "aws_security_group" "app1" {
