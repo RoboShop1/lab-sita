@@ -15,6 +15,10 @@ output "all" {
   value = module.vpc
 }
 
+
+output "data" {
+  value = {for i,j in lookup(module.vpc, "dev",null): i=>j }
+}
 variable "vpc" {
   default = {
     dev = {
