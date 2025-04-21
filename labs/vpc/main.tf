@@ -228,6 +228,37 @@ resource "aws_security_group" "app1" {
 }
 
 
+variable "sg2" {
+  default = {
+    ssh = 22
+    web = 80
+  }
+}
+
+resource "aws_security_group" "app2" {
+  name = "app_sg2"
+  description = "for public-subnets"
+
+  dynamic "ingress" {
+    for_each = var.sg1
+    content {
+      from_port = ingress.value
+      to_port = ingress.value
+      protocol = "TCP"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+
+
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 
 
 
