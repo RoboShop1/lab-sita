@@ -153,86 +153,85 @@
 
 
 
-
-
-variable "sg" {
-  default = {
-    ssh = {
-      from_port = 22
-      to_port   = 22
-      protocol = "TCP"
-      cidr_blocks = ["0.0.0.0/0"]
-    }
-    http = {
-      from_port = 80
-      to_port   = 80
-      protocol = "TCP"
-      cidr_blocks = ["0.0.0.0/0"]
-    }
-  }
-}
-
-
-resource "aws_security_group" "app" {
-  name = "app_sg"
-  description = "for public-subnets"
-
-  dynamic "ingress" {
-    for_each = var.sg
-    content {
-      from_port = ingress.value["from_port"]
-      to_port = ingress.value["to_port"]
-      protocol = ingress.value["protocol"]
-      cidr_blocks = ingress.value["cidr_blocks"]
-    }
-  }
-
-
-
-  egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-
-
-variable "sg1" {
-  default = [22,80]
-}
-
-resource "aws_security_group" "app1" {
-  name = "app_sg1"
-  description = "for public-subnets"
-
-  dynamic "ingress" {
-    for_each = var.sg1
-    content {
-      from_port = ingress.value
-      to_port = ingress.value
-      protocol = "TCP"
-      cidr_blocks = ["0.0.0.0/0"]
-    }
-  }
-
-
-
-  egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-
+#
+#
+# variable "sg" {
+#   default = {
+#     ssh = {
+#       from_port = 22
+#       to_port   = 22
+#       protocol = "TCP"
+#       cidr_blocks = ["0.0.0.0/0"]
+#     }
+#     http = {
+#       from_port = 80
+#       to_port   = 80
+#       protocol = "TCP"
+#       cidr_blocks = ["0.0.0.0/0"]
+#     }
+#   }
+# }
+#
+#
+# resource "aws_security_group" "app" {
+#   name = "app_sg"
+#   description = "for public-subnets"
+#
+#   dynamic "ingress" {
+#     for_each = var.sg
+#     content {
+#       from_port = ingress.value["from_port"]
+#       to_port = ingress.value["to_port"]
+#       protocol = ingress.value["protocol"]
+#       cidr_blocks = ingress.value["cidr_blocks"]
+#     }
+#   }
+#
+#
+#
+#   egress {
+#     from_port = 0
+#     to_port = 0
+#     protocol = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+# }
+#
+#
+#
+# variable "sg1" {
+#   default = [22,80]
+# }
+#
+# resource "aws_security_group" "app1" {
+#   name = "app_sg1"
+#   description = "for public-subnets"
+#
+#   dynamic "ingress" {
+#     for_each = var.sg1
+#     content {
+#       from_port = ingress.value
+#       to_port = ingress.value
+#       protocol = "TCP"
+#       cidr_blocks = ["0.0.0.0/0"]
+#     }
+#   }
+#
+#
+#
+#   egress {
+#     from_port = 0
+#     to_port = 0
+#     protocol = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+# }
+#
+#
 variable "sg2" {
   default = {
     ssh = 22
     web = 80
-    smtp = 25
   }
 }
 
@@ -241,7 +240,7 @@ resource "aws_security_group" "app2" {
   description = "for public-subnets"
 
   dynamic "ingress" {
-    for_each = var.sg1
+    for_each = var.sg2
     content {
       from_port = ingress.value
       to_port = ingress.value
