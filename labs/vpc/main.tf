@@ -17,14 +17,14 @@ output "all" {
 }
 
 
-output "data" {
-  value = {for i,j in lookup(module.vpc, "dev",null): i => {for m,n in j: m => lookup(n,"id",null)} }
-}
-
-
-output "public_subnets" {
-  value = lookup({for i,j in lookup(module.vpc, "dev",null): i => {for m,n in j: m => n["id"]} },"public_subnets",null)
-}
+# output "data" {
+#   value = {for i,j in lookup(module.vpc, "dev",null): i => {for m,n in j: m => lookup(n,"id",null)} }
+# }
+#
+#
+# output "public_subnets" {
+#   value = lookup({for i,j in lookup(module.vpc, "dev",null): i => {for m,n in j: m => n["id"]} },"public_subnets",null)
+# }
 
 
 resource "aws_security_group" "public" {
