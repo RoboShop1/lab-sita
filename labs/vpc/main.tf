@@ -232,6 +232,7 @@ variable "sg2" {
   default = {
     ssh = 22
     web = 80
+    smtp = 25
   }
 }
 
