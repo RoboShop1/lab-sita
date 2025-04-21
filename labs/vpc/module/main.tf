@@ -74,13 +74,7 @@ resource "aws_nat_gateway" "nat-gw" {
 }
 
 
-output "eip" {
-  value = aws_eip.eip
-}
 
-output "nat" {
-  value = aws_nat_gateway.nat-gw
-}
 
 
 // **** app subnets **** //
@@ -131,6 +125,8 @@ resource "aws_subnet" "db_subnets" {
     Name = "${var.env}-vpc-${each.key}-subnet"
   }
 }
+
+
 
 
 resource "aws_route_table" "db-rt" {
