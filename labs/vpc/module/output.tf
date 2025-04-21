@@ -10,3 +10,7 @@ output "app_subnets" {
 output "db_subnets" {
   value = aws_subnet.db_subnets
 }
+
+output "vpc_id" {
+  value = aws_vpc.main.id
+}
