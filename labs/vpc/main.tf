@@ -116,9 +116,13 @@ resource "aws_instance" "app_subnets" {
 
 
 output "app_instances" {
-  value = ""
+  value = aws_instance.app_subnets
 }
 
+
+output "public_instances" {
+  value = aws_instance.public_subnets
+}
 
 
 
