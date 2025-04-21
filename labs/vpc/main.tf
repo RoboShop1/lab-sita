@@ -36,15 +36,15 @@ output "public_subnets" {
 
 
 
-resource "aws_instance" "public_subnets" {
-  for_each =
-  ami = ""
-  instance_type = ""
-
-  tags = {
-    Name = "${each.key}"
-  }
-}
+# resource "aws_instance" "public_subnets" {
+#   for_each =
+#   ami = ""
+#   instance_type = ""
+#
+#   tags = {
+#     Name = "${each.key}"
+#   }
+# }
 
 
 variable "vpc" {
