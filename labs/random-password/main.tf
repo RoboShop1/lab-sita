@@ -1,3 +1,4 @@
+
 resource "random_string" "random" {
   length           = 16
   special          = false
@@ -51,4 +52,12 @@ data "aws_secretsmanager_secret_version" "by-version-stage" {
 output "fix" {
   value = data.aws_secretsmanager_secret_version.by-version-stage.secret_string
   sensitive = true
+}
+
+resource "null_resource" "one" {
+  provisioner "local-exec" {
+    command =<<EOT
+echo "${data.aws_secretsmanager_secret_version.by-version-stage.secret_string}" > /tmp/120.txt
+EOT
+  }
 }
