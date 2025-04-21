@@ -116,7 +116,7 @@ resource "aws_instance" "app_subnets" {
 
 
 output "app_instances" {
-  value = {for i,j in aws_instance.app_subnets: i => j.public_ip}
+  value = {for i,j in aws_instance.app_subnets: i => j.private_ip}
 }
 
 
