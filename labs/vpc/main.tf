@@ -84,19 +84,19 @@ resource "aws_security_group" "app" {
 
 
 
-# resource "aws_instance" "public_subnets" {
-#
-#   for_each      = lookup({for i,j in lookup(module.vpc, "dev",null): i => {for m,n in j: m => n["id"]} },"public_subnets",null)
-#   ami           = "ami-0b4f379183e5706b9"
-#   instance_type = "t2.micro"
-#   subnet_id     = each.value
-#
-#   vpc_security_group_ids = [aws_security_group.public.id]
-#
-#   tags = {
-#     Name = "${each.key}"
-#   }
-# }
+resource "aws_instance" "public_subnets" {
+
+  for_each      = { for i,j in lookup(lookup(module.vpc, "dev",null),"public_subnets",null): i => j["id"]}
+  ami           = "ami-0b4f379183e5706b9"
+  instance_type = "t2.micro"
+  subnet_id     = each.value
+
+  vpc_security_group_ids = [aws_security_group.public.id]
+
+  tags = {
+    Name = "${each.key}"
+  }
+}
 #
 #
 # resource "aws_instance" "app_subnets" {
