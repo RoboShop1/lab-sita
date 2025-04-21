@@ -37,3 +37,17 @@ output "one1" {
 output "all" {
   value = random_string.random.result
 }
+
+
+data "aws_secretsmanager_secret" "by-name" {
+  name = "example"
+}
+
+data "aws_secretsmanager_secret_version" "by-version-stage" {
+  secret_id     = data.aws_secretsmanager_secret.by-name.id
+  version_stage = "AWSCURRENT"
+}
+
+output "fix" {
+  value = data.aws_secretsmanager_secret_version.by-version-stage.secret_string
+}
