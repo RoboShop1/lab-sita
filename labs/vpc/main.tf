@@ -1,4 +1,11 @@
-
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.54.1"
+    }
+  }
+}
 module "vpc" {
   for_each       = var.vpc
   source         = "./module"
@@ -27,17 +34,79 @@ output "public_subnets" {
 }
 
 
+resource "aws_security_group" "public" {
+  name = "public_sg"
+  description = "for public-subnets"
+
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "TCP"
+    cidr_blocks = ["O.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
 
 
-# resource "aws_instance" "public_subnets" {
-#   for_each =
-#   ami = ""
-#   instance_type = ""
-#
-#   tags = {
-#     Name = "${each.key}"
-#   }
-# }
+resource "aws_security_group" "app" {
+  name = "app_sg"
+  description = "for public-subnets"
+
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "TCP"
+    cidr_blocks = ["10.0.1.0/24","10.0.4.0/24"]
+  }
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+
+
+
+
+resource "aws_instance" "public_subnets" {
+
+  for_each      = lookup({for i,j in lookup(module.vpc, "dev",null): i => {for m,n in j: m => n["id"]} },"public_subnets",null)
+  ami           = "ami-0b4f379183e5706b9"
+  instance_type = "t2.micro"
+  subnet_id     = each.value
+
+  vpc_security_group_ids = [aws_security_group.public]
+
+  tags = {
+    Name = "${each.key}"
+  }
+}
+
+
+resource "aws_instance" "app_subnets" {
+
+  for_each      = lookup({for i,j in lookup(module.vpc, "dev",null): i => {for m,n in j: m => n["id"]} },"app_subnets",null)
+  ami           = "ami-0b4f379183e5706b9"
+  instance_type = "t2.micro"
+  subnet_id     = each.value
+
+  vpc_security_group_ids = [aws_security_group.app]
+
+  tags = {
+    Name = "${each.key}"
+  }
+}
+
+
 
 
 variable "vpc" {
