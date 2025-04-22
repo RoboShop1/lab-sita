@@ -14,37 +14,37 @@ output "app_subnets" {
 }
 
 
+
+module "eks" {
+  for_each                          = var.eks
+  source                            = "./modules/eks"
+  env                               = var.env
+  eks_subnets                       = values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id})
+  eks_version                       = each.value["eks_version"]
+  node_groups                       = each.value["node_groups"]
+  node_polices                      = each.value["node_polices"]
+  addons                            = each.value["addons"]
+  aws_eks_pod_identity_associations = each.value["aws_eks_pod_identity_associations"]
+}
 #
-# module "eks" {
-#   for_each                          = var.eks
-#   source                            = "./modules/eks"
-#   env                               = var.env
-#   eks_subnets                       = values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id})
-#   eks_version                       = each.value["eks_version"]
-#   node_groups                       = each.value["node_groups"]
-#   node_polices                      = each.value["node_polices"]
-#   addons                            = each.value["addons"]
-#   aws_eks_pod_identity_associations = each.value["aws_eks_pod_identity_associations"]
+#
+#
+module "eks_access" {
+  for_each              = var.aws_eks_access_entry
+  depends_on            = [module.eks]
+  source                = "./modules/eks-access"
+  eks_cluster_name      = "dev-eks"
+  principal_arn         = each.value["principal_arn"]
+  policy_arn            = each.value["policy_arn"]
+  cluster_level         = each.value["cluster_level"]
+  namespaces            = each.value["namespaces"]
+}
+
+
+# output "eks_sg_id" {
+#   value = module.eks
 # }
-# #
-# #
-# #
-# module "eks_access" {
-#   for_each              = var.aws_eks_access_entry
-#   depends_on            = [module.eks]
-#   source                = "./modules/eks-access"
-#   eks_cluster_name      = "dev-eks"
-#   principal_arn         = each.value["principal_arn"]
-#   policy_arn            = each.value["policy_arn"]
-#   cluster_level         = each.value["cluster_level"]
-#   namespaces            = each.value["namespaces"]
-# }
-#
-#
-# # output "eks_sg_id" {
-# #   value = module.eks
-# # }
-#
+
 # resource "aws_instance" "main" {
 #   depends_on = [module.eks_access]
 # #  count         = element(values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}),0)
