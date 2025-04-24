@@ -3,14 +3,14 @@ eks = {
     eks_version = "1.30"
     node_groups = {
       node_group1 = {
-        subnets        = ["subnet-0c05ce48742dc2cc8","subnet-0c103dd00f89174a8"]
+        subnets        = ["subnet-01b55c9bb5ad2d275","subnet-0ec9da54a6828f85d"]
         desired_size   = 2
         max_size       = 2
         min_size       = 1
         instance_types = ["t3.medium"]
       }
       node_group2 = {
-        subnets        = ["subnet-0c05ce48742dc2cc8","subnet-0c103dd00f89174a8"]
+        subnets        = ["subnet-01b55c9bb5ad2d275","subnet-0ec9da54a6828f85d"]
         desired_size   = 2
         max_size       = 2
         min_size       = 1
