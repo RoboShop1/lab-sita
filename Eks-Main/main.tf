@@ -19,17 +19,17 @@ output "app_subnets1" {
 }
 
 #
-# module "eks" {
-#   for_each                          = var.eks
-#   source                            = "./modules/eks"
-#   env                               = var.env
-#   eks_subnets                       = values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id})
-#   eks_version                       = each.value["eks_version"]
-#   node_groups                       = each.value["node_groups"]
-#   node_polices                      = each.value["node_polices"]
-#   addons                            = each.value["addons"]
-#   aws_eks_pod_identity_associations = each.value["aws_eks_pod_identity_associations"]
-# }
+module "eks" {
+  for_each                          = var.eks
+  source                            = "./modules/eks"
+  env                               = var.env
+  eks_subnets                       = values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id})
+  eks_version                       = each.value["eks_version"]
+  node_groups                       = each.value["node_groups"]
+  node_polices                      = each.value["node_polices"]
+  addons                            = each.value["addons"]
+  aws_eks_pod_identity_associations = each.value["aws_eks_pod_identity_associations"]
+}
 #
 #
 #
