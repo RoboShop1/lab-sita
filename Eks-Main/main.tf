@@ -33,16 +33,16 @@ module "eks" {
 #
 #
 #
-# module "eks_access" {
-#   for_each              = var.aws_eks_access_entry
-#   depends_on            = [module.eks]
-#   source                = "./modules/eks-access"
-#   eks_cluster_name      = "dev-eks"
-#   principal_arn         = each.value["principal_arn"]
-#   policy_arn            = each.value["policy_arn"]
-#   cluster_level         = each.value["cluster_level"]
-#   namespaces            = each.value["namespaces"]
-# }
+module "eks_access" {
+  for_each              = var.aws_eks_access_entry
+  depends_on            = [module.eks]
+  source                = "./modules/eks-access"
+  eks_cluster_name      = "dev-eks"
+  principal_arn         = each.value["principal_arn"]
+  policy_arn            = each.value["policy_arn"]
+  cluster_level         = each.value["cluster_level"]
+  namespaces            = each.value["namespaces"]
+}
 #
 #
 # output "eks_sg_id" {
