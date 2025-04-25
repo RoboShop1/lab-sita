@@ -14,6 +14,10 @@ output "app_subnets" {
 }
 
 
+output "app_subnets1" {
+  value = (values({for i,j in lookup(module.vpc["main"],"app_subnets",null): i => j.id}))
+}
+
 #
 # module "eks" {
 #   for_each                          = var.eks
