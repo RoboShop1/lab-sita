@@ -4,7 +4,7 @@ data "aws_s3_object" "bootstrap_script" {
 }
 
 output "checksum" {
-  value = data.aws_s3_object.bootstrap_script.checksum_sha256
+  value = data.aws_s3_object.bootstrap_script
 }
 
 
