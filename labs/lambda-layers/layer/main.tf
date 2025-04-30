@@ -4,7 +4,7 @@ data "aws_s3_object" "bootstrap_script" {
 }
 
 output "checksum" {
-  value = data.aws_s3_object.bootstrap_script
+  value = data.aws_s3_object.bootstrap_script.version_id
 }
 
 
