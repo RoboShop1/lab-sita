@@ -21,6 +21,7 @@ resource "aws_lambda_layer_version" "lambda_layer" {
   compatible_runtimes = ["python3.11"]
   compatible_architectures = ["x86_64"]
   source_code_hash         = data.aws_s3_object.bootstrap_script.version_id
+  skip_destroy             = true
 }
 
 
