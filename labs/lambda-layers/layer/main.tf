@@ -20,7 +20,6 @@ resource "aws_lambda_layer_version" "lambda_layer" {
   s3_key              = "sample.zip"
   compatible_runtimes = ["python3.11"]
   compatible_architectures = ["x86_64"]
-  s3_object_version        = "sample.zip"
 }
 
 
