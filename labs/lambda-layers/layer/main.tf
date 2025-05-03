@@ -7,12 +7,6 @@ output "checksum" {
   value = data.aws_s3_object.bootstrap_script.version_id
 }
 
-
-
-
-
-
-
 resource "aws_lambda_layer_version" "lambda_layer" {
   layer_name          = "two"
   description         = "My Python layer with requests"
