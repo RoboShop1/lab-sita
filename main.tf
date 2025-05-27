@@ -8,8 +8,7 @@ module "ec2" {
   name          = each.key
 }
 
-#
-#
+
 
 # module "s3" {
 #
