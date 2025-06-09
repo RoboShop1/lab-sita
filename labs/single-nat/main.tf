@@ -87,11 +87,6 @@ resource "aws_route_table" "nat-private-rt" {
     nat_gateway_id = aws_nat_gateway.example.id
   }
 
-  route {
-    cidr_block = "10.2.0.0/16"
-    transit_gateway_id = aws_ec2_transit_gateway.example.id
-
-  }
 
 
 
@@ -139,10 +134,6 @@ resource "aws_route_table" "dev-private-rt" {
     transit_gateway_id = aws_ec2_transit_gateway.example.id
   }
 
-  route {
-    cidr_block = "0.0.0.0/0"
-    transit_gateway_id = aws_ec2_transit_gateway.example.id
-  }
 
   tags = {
     Name = "dev-private-rt"
