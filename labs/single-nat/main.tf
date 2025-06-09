@@ -16,6 +16,7 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_route_table" "nat-public-rt" {
   vpc_id = aws_vpc.nat-gw.id
 
+
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
@@ -34,6 +35,7 @@ resource "aws_route_table_association" "a" {
 resource "aws_subnet" "public" {
   vpc_id     = aws_vpc.nat-gw.id
   cidr_block = "10.1.1.0/24"
+  map_public_ip_on_launch = true
 
   tags = {
     Name = "nat-gw-public"
