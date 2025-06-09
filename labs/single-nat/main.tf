@@ -44,6 +44,11 @@ resource "aws_route_table" "nat-public-rt" {
     transit_gateway_id = aws_ec2_transit_gateway.example.id
   }
 
+  route {
+    cidr_block = "10.3.0.0/16"
+    transit_gateway_id = aws_ec2_transit_gateway.example.id
+  }
+
   tags = {
     Name = "nat-public-rt"
   }
