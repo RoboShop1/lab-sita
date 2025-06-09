@@ -71,6 +71,7 @@ resource "aws_route_table_association" "igw-rta-private" {
                             #-------------#
                             #    dev      #
                             #-------------#
+
 resource "aws_vpc" "dev" {
   cidr_block       = "10.2.0.0/16"
   tags = {
@@ -89,6 +90,11 @@ resource "aws_subnet" "dev-private" {
 
 resource "aws_route_table" "dev-private-rt" {
   vpc_id = aws_vpc.dev.id
+
+  route {
+    cidr_block = "10.1.0.0/16"
+    transit_gateway_id = aws_ec2_transit_gateway.example.id
+  }
 
   tags = {
     Name = "dev-private-rt"
