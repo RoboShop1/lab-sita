@@ -77,7 +77,7 @@ resource "aws_vpc" "dev" {
 }
 
 resource "aws_subnet" "dev-private" {
-  vpc_id     = aws_vpc.nat-gw.id
+  vpc_id     = aws_vpc.dev.id
   cidr_block = "10.2.1.0/24"
 
   tags = {
