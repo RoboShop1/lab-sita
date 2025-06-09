@@ -95,6 +95,8 @@ resource "aws_route_table" "nat-private-rt" {
   }
 }
 
+#
+#
 
 resource "aws_route_table_association" "igw-rta-private" {
   subnet_id      = aws_subnet.private.id
