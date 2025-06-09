@@ -5,10 +5,27 @@ resource "aws_vpc" "nat-gw" {
   }
 }
 
+
+
+resource "aws_eip" "aws_eip" {
+  domain   = "vpc"
+}
+
+
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.nat-gw.id
   tags = {
     Name = "nat--vpc-igw"
+  }
+}
+
+
+resource "aws_nat_gateway" "example" {
+  allocation_id = aws_eip.aws_eip.id
+  subnet_id     = aws_subnet.public.id
+
+  tags = {
+    Name = "nat-vpc-nat"
   }
 }
 
@@ -59,6 +76,11 @@ resource "aws_subnet" "private" {
 
 resource "aws_route_table" "nat-private-rt" {
   vpc_id = aws_vpc.nat-gw.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.example.id
+  }
 
   tags = {
     Name = "nat-private-rt"
