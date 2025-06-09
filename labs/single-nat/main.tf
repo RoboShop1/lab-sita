@@ -58,6 +58,12 @@ resource "aws_route_table" "nat-private-rt" {
 }
 
 
+resource "aws_route_table_association" "igw-rta-private" {
+  subnet_id      = aws_subnet.private.id
+  route_table_id = aws_route_table.nat-private-rt.id
+}
+
+
 
 
                             #-------------#
@@ -69,6 +75,30 @@ resource "aws_vpc" "dev" {
     Name = "dev-vpc"
   }
 }
+
+resource "aws_subnet" "dev-private" {
+  vpc_id     = aws_vpc.nat-gw.id
+  cidr_block = "10.2.1.0/24"
+
+  tags = {
+    Name = "dev-private"
+  }
+}
+
+resource "aws_route_table" "dev-private-rt" {
+  vpc_id = aws_vpc.dev.id
+
+  tags = {
+    Name = "dev-private-rt"
+  }
+}
+
+resource "aws_route_table_association" "dev-rta-private" {
+  subnet_id      = aws_subnet.dev-private.id
+  route_table_id = aws_route_table.nat-private-rt.id
+}
+
+
 
 
                           #--------------#
