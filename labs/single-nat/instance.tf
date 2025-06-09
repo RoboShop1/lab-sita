@@ -11,6 +11,12 @@ resource "aws_instance" "nat-public" {
 }
 
 
+#
+
+output "nat-public-ip" {
+  value = aws_instance.nat-public.public_ip
+}
+
 resource "aws_instance" "dev-private" {
   ami            = "i-0817ad560e194335d"
   instance_type  = "t3.small"
