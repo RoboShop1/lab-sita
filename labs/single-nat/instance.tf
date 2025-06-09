@@ -1,6 +1,6 @@
 
 resource "aws_instance" "nat-public" {
-  ami            = "i-0817ad560e194335d"
+  ami            = "ami-0b4f379183e5706b9"
   instance_type  = "t3.small"
   subnet_id      = aws_subnet.public.id
 
@@ -18,7 +18,7 @@ output "nat-public-ip" {
 }
 
 resource "aws_instance" "dev-private" {
-  ami            = "i-0817ad560e194335d"
+  ami            = "ami-0b4f379183e5706b9"
   instance_type  = "t3.small"
   subnet_id      = aws_subnet.dev-private.id
 
