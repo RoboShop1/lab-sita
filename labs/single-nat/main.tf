@@ -95,7 +95,7 @@ resource "aws_route_table" "dev-private-rt" {
 
 resource "aws_route_table_association" "dev-rta-private" {
   subnet_id      = aws_subnet.dev-private.id
-  route_table_id = aws_route_table.nat-private-rt.id
+  route_table_id = aws_route_table.dev-private-rt.id
 }
 
 
